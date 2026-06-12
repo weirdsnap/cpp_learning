@@ -1,0 +1,26 @@
+# 博客文章/笔记（非代码部分）
+notes/
+
+# 编译产物
+build/
+*.o
+*.out
+
+# 可执行文件（由 Makefile 生成）
+reader
+writer
+unsign_int
+shm_basic_reader
+shm_basic_writer
+shm_ringbuffer_reader
+shm_ringbuffer_writer
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
