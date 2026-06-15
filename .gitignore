@@ -3,8 +3,16 @@ notes/
 
 # 编译产物
 build/
+Build/
+build-*/
 *.o
+*.obj
+*.d
 *.out
+*.slo
+*.lo
+*.exe
+*.app
 
 # 可执行文件（由 Makefile 生成）
 reader
@@ -15,6 +23,27 @@ shm_basic_writer
 shm_ringbuffer_reader
 shm_ringbuffer_writer
 
+# 预编译头
+*.gch
+*.pch
+
+# 库文件
+*.so
+*.so.*
+*.dylib
+*.dll
+*.a
+*.lib
+*.lai
+*.la
+
+# CMake 生成文件
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+
 # IDE
 .vscode/
 .idea/
@@ -22,5 +51,17 @@ shm_ringbuffer_writer
 *.swo
 *~
 
+# 临时/日志文件
+*.tmp
+*.log
+*.bak
+
 # 系统文件
 .DS_Store
+
+# vcpkg
+vcpkg_installed/
+
+# 测试/缓存
+Testing/
+.cache/
