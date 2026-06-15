@@ -8,20 +8,20 @@
 .
 ├── Makefile                # 根 Makefile，一键编译所有子项目
 ├── README.md               # 本文件
-├── notes/                  # 博客笔记/文章
-│   ├── POSIX共享内存学习笔记.md
-│   └── POSIX共享内存进阶——环形缓冲区设计.md
+├── notes/                  # 博客笔记/文章（软连接，不提交到本仓库）
+├── basic_type/             # 基础类型相关验证
+│   └── unsign/             # 无符号整数回绕
+├── ch01/                   # C++ 语言基础与类型系统（博客 ch01 代码验证）
+│   ├── fundamental_types/  # 基础类型、字面量、numeric_limits
+│   ├── type_deduction/     # auto / decltype / decltype(auto) / 类型退化
+│   ├── const_reference/    # const 引用、std::max/min 返回引用
+│   ├── lifecycle/          # 构造析构顺序、const/constexpr、悬垂引用
+│   ├── polymorphism/       # 静态/动态类型、enum class、对象切片
+│   ├── function_lambda/    # operator bool、函数对象、Lambda、求值顺序
+│   └── modern_types/       # variant / optional / 转发引用
 └── ipc/                    # 进程间通信主题
     ├── shm-basic/          # POSIX 共享内存基础示例
-    │   ├── Makefile
-    │   ├── writer.cpp
-    │   └── reader.cpp
     └── shm-ringbuffer/     # POSIX 共享内存环形缓冲区
-        ├── Makefile
-        ├── include/
-        │   └── shm_data.h
-        ├── writer.cpp
-        └── reader.cpp
 ```
 
 ## 编译要求
@@ -74,9 +74,9 @@ cd ipc/shm-ringbuffer
 
 ## 添加新的子项目
 
-1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/`
+1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/` 或 `ch01/your-topic/`
 2. 子文件夹内创建 `Makefile`
-3. 根 `Makefile` 会自动发现 `ipc/*` 下的所有子目录
+3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*` 和 `ch01/*` 下的所有子目录
 4. 运行 `make` 即可编译新项目
 
 ## 清理编译产物
