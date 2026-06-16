@@ -22,12 +22,14 @@ shm_basic_writer
 shm_ringbuffer_reader
 shm_ringbuffer_writer
 basic_type/fundamental_types/fundamental_types
+basic_type/fundamental_types/fundamental_types_test
 basic_type/type_deduction/type_deduction
 basic_type/const_reference/const_reference
 basic_type/lifecycle/lifecycle
 basic_type/polymorphism/polymorphism
 basic_type/function_lambda/function_lambda
 basic_type/modern_types/modern_types
+basic_type/modern_types/modern_types_test
 basic_type/nullptr_void/nullptr_void
 
 # 预编译头

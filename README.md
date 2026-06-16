@@ -9,6 +9,8 @@
 ├── Makefile                # 根 Makefile，一键编译所有子项目
 ├── README.md               # 本文件
 ├── notes/                  # 博客笔记/文章（软连接，不提交到本仓库）
+├── third_party/            # 第三方依赖
+│   └── doctest/            # doctest 单头文件测试框架
 ├── basic_type/             # 基础类型与类型系统相关验证（博客 ch01）
 │   ├── fundamental_types/  # 无符号回绕、char 符号性、字面量、字符串字面量
 │   ├── type_deduction/     # auto / decltype / decltype(auto) / 类型退化
@@ -77,6 +79,21 @@ cd ipc/shm-ringbuffer
 2. 子文件夹内创建 `Makefile`
 3. 根 `Makefile` 会自动发现 `ipc/*` 和 `basic_type/*` 下的所有子目录
 4. 运行 `make` 即可编译新项目
+
+## 运行测试
+
+部分子项目包含基于 [doctest](https://github.com/doctest/doctest) 的单元测试：
+
+```bash
+make test
+```
+
+测试文件命名为 `*_test.cpp`，对应的 Makefile 提供 `test` 目标。进入子目录也可以单独运行：
+
+```bash
+cd basic_type/fundamental_types
+make test
+```
 
 ## 清理编译产物
 
