@@ -28,6 +28,7 @@ basic_type/lifecycle/lifecycle
 basic_type/polymorphism/polymorphism
 basic_type/function_lambda/function_lambda
 basic_type/modern_types/modern_types
+basic_type/nullptr_void/nullptr_void
 
 # 预编译头
 *.gch

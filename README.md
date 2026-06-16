@@ -10,13 +10,14 @@
 ├── README.md               # 本文件
 ├── notes/                  # 博客笔记/文章（软连接，不提交到本仓库）
 ├── basic_type/             # 基础类型与类型系统相关验证（博客 ch01）
-│   ├── fundamental_types/  # 无符号回绕、基础类型、字面量、numeric_limits
+│   ├── fundamental_types/  # 无符号回绕、char 符号性、字面量、字符串字面量
 │   ├── type_deduction/     # auto / decltype / decltype(auto) / 类型退化
 │   ├── const_reference/    # const 引用、std::max/min 返回引用
 │   ├── lifecycle/          # 构造析构顺序、const/constexpr、悬垂引用
 │   ├── polymorphism/       # 静态/动态类型、enum class、对象切片
 │   ├── function_lambda/    # operator bool、函数对象、Lambda、求值顺序
-│   └── modern_types/       # variant / optional / 转发引用
+│   ├── modern_types/       # variant / optional / 转发引用
+│   └── nullptr_void/       # NULL / nullptr / void*
 └── ipc/                    # 进程间通信主题
     ├── shm-basic/          # POSIX 共享内存基础示例
     └── shm-ringbuffer/     # POSIX 共享内存环形缓冲区
