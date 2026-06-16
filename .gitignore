@@ -17,7 +17,6 @@ build-*/
 # 可执行文件（由 Makefile 生成）
 reader
 writer
-unsign_int
 shm_basic_reader
 shm_basic_writer
 shm_ringbuffer_reader

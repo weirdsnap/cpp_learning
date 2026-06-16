@@ -10,8 +10,7 @@
 ├── README.md               # 本文件
 ├── notes/                  # 博客笔记/文章（软连接，不提交到本仓库）
 ├── basic_type/             # 基础类型与类型系统相关验证（博客 ch01）
-│   ├── unsign/             # 无符号整数回绕
-│   ├── fundamental_types/  # 基础类型、字面量、numeric_limits
+│   ├── fundamental_types/  # 无符号回绕、基础类型、字面量、numeric_limits
 │   ├── type_deduction/     # auto / decltype / decltype(auto) / 类型退化
 │   ├── const_reference/    # const 引用、std::max/min 返回引用
 │   ├── lifecycle/          # 构造析构顺序、const/constexpr、悬垂引用
