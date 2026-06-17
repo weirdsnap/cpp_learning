@@ -9,8 +9,12 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <cstdlib>
 
-int main() {
+int main(int argc, char* argv[]) {
+    int total = (argc > 1) ? std::atoi(argv[1]) : 1000;
+    bool test_mode = (argc > 1);
+
     int fd = shm_open(NAME, O_CREAT | O_RDWR, 0666);
     if (fd == -1) {
         perror("shm_open");
@@ -39,7 +43,7 @@ int main() {
 
     std::cout << "[Writer] 开始生产..." << std::endl;
 
-    for (int i = 0; i < 1000; ++i) {
+    for (int i = 0; i < total; ++i) {
         // 如果写端领先读端超过 MSG_COUNT，阻塞等待
         while (data->write_idx.load() - data->read_idx.load() >= MSG_COUNT) {
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -53,7 +57,7 @@ int main() {
         // 数据写完后，更新写指针（通知读端）
         data->write_idx.fetch_add(1);
 
-        if (i % 10 == 0) {
+        if (!test_mode && i % 10 == 0) {
             std::cout << "[Writer] 已生产 " << i << " 条" << std::endl;
         }
 
@@ -61,8 +65,12 @@ int main() {
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 
-    std::cout << "[Writer] 完成 1000 条，按回车键退出..." << std::endl;
-    std::cin.get();
+    std::cout << "[Writer] 完成 " << total << " 条" << std::endl;
+
+    if (!test_mode) {
+        std::cout << "[Writer] 按回车键退出..." << std::endl;
+        std::cin.get();
+    }
 
     munmap(addr, SHM_SIZE);
     shm_unlink(NAME);

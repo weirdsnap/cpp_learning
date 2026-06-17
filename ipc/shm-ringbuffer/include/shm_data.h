@@ -5,7 +5,7 @@
 #include <atomic>
 #include <cstddef>
 
-constexpr const char* NAME = "/my_shm";
+constexpr const char* NAME = "/my_shm_ringbuffer";
 constexpr int MSG_COUNT = 100;
 
 struct Message {

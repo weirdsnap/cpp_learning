@@ -6,8 +6,14 @@
 #include <unistd.h>      // close()、ftruncate()
 #include <cstring>       // std::memcpy()、std::strlen()
 #include <iostream>      // std::cout、std::cin、std::endl
+#include <string>        // std::string
+#include <thread>        // std::this_thread::sleep_for
+#include <chrono>        // std::chrono::seconds
 
-int main() {
+int main(int argc, char* argv[]) {
+    bool test_mode = (argc > 1 && std::string(argv[1]) == "--test");
+    const char* msg = (test_mode && argc > 2) ? argv[2] : "Hello, SHM!";
+
     constexpr const char* name = "my_shm";
 
     int fd = shm_open(name, O_CREAT | O_RDWR, 0666);
@@ -31,11 +37,15 @@ int main() {
 
     close(fd);
 
-    const char* msg = "Hello, SHM!";
     std::memcpy(addr, msg, std::strlen(msg) + 1);
 
-    std::cout << "[Writer] 已写入，按回车键退出..." << std::endl;
-    std::cin.get();
+    if (test_mode) {
+        std::cout << "[Writer] 已写入: " << msg << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+    } else {
+        std::cout << "[Writer] 已写入，按回车键退出..." << std::endl;
+        std::cin.get();
+    }
 
     munmap(addr, 4096);
     shm_unlink(name);

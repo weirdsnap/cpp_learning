@@ -5,11 +5,15 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <cstdio>
+#include <cstdlib>
 #include <iostream>
 #include <thread>
 #include <chrono>
 
-int main() {
+int main(int argc, char* argv[]) {
+    int target = (argc > 1) ? std::atoi(argv[1]) : 1000;
+    bool test_mode = (argc > 1);
+
     int fd = shm_open(NAME, O_RDWR, 0666);
     if (fd == -1) {
         perror("shm_open");
@@ -29,7 +33,7 @@ int main() {
     std::cout << "[Reader] 开始消费..." << std::endl;
 
     int consumed = 0;
-    while (consumed < 1000) {
+    while (consumed < target) {
         int write_idx = data->write_idx.load();
         int read_idx = data->read_idx.load();
 
@@ -42,9 +46,11 @@ int main() {
         int idx = read_idx % MSG_COUNT;
         const Message& msg = data->msgs[idx];
 
-        std::cout << "[Reader] [" << consumed << "] id=" << msg.id
-                  << ", name=" << msg.name
-                  << ", value=" << msg.value << std::endl;
+        if (!test_mode) {
+            std::cout << "[Reader] [" << consumed << "] id=" << msg.id
+                      << ", name=" << msg.name
+                      << ", value=" << msg.value << std::endl;
+        }
 
         data->read_idx.fetch_add(1);
         consumed++;
