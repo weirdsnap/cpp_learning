@@ -1,22 +1,12 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
+#include "fundamental_types_utils.h"
+
 #include <climits>
 #include <cstdint>
 #include <string>
 #include <type_traits>
-
-// 自定义 UDL，供测试使用
-struct Distance {
-    long double meters;
-};
-
-Distance operator"" _km(long double value) {
-    return Distance{value * 1000.0L};
-}
-Distance operator"" _m(long double value) {
-    return Distance{value};
-}
 
 TEST_CASE("无符号整型回绕") {
     unsigned int max = ~0u;

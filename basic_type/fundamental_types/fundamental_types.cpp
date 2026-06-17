@@ -18,21 +18,7 @@ void f(char)             { std::cout << "  f(char)\n"; }
 void f(signed char)      { std::cout << "  f(signed char)\n"; }
 void f(unsigned char)    { std::cout << "  f(unsigned char)\n"; }
 
-// 03 UDL 示例
-struct Distance {
-    long double meters;
-};
-
-Distance operator"" _km(long double value) {
-    return Distance{value * 1000.0L};
-}
-Distance operator"" _m(long double value) {
-    return Distance{value};
-}
-
-std::ostream& operator<<(std::ostream& os, const Distance& d) {
-    return os << d.meters << "m";
-}
+#include "fundamental_types_utils.h"
 
 // 01 有符号溢出检查：编译器优化陷阱
 bool check_overflow(int x) {
