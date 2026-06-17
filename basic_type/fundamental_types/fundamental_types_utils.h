@@ -1,4 +1,6 @@
 #pragma once
+#ifndef FUNDAMENTAL_TYPES_UTILS_H
+#define FUNDAMENTAL_TYPES_UTILS_H
 
 #include <iostream>
 
@@ -18,3 +20,5 @@ inline Distance operator"" _m(long double value) {
 inline std::ostream& operator<<(std::ostream& os, const Distance& d) {
     return os << d.meters << "m";
 }
+
+#endif // FUNDAMENTAL_TYPES_UTILS_H

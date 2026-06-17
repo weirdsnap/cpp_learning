@@ -1,3 +1,4 @@
+#pragma once
 #ifndef SHM_DATA_H
 #define SHM_DATA_H
 
