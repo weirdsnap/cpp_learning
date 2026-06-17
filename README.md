@@ -1,5 +1,7 @@
 # 博客 C++ 代码实现仓库
 
+[![CI](https://github.com/weirdsnap/cpp_learning/actions/workflows/ci.yml/badge.svg)](https://github.com/weirdsnap/cpp_learning/actions/workflows/ci.yml)
+
 本仓库用于存放博客文章中各种 C++ 技术的实现代码，每个子项目都可以独立编译和运行。
 
 ## 目录结构
