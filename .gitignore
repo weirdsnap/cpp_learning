@@ -24,13 +24,19 @@ shm_ringbuffer_writer
 basic_type/fundamental_types/fundamental_types
 basic_type/fundamental_types/fundamental_types_test
 basic_type/type_deduction/type_deduction
+basic_type/type_deduction/type_deduction_test
 basic_type/const_reference/const_reference
+basic_type/const_reference/const_reference_test
 basic_type/lifecycle/lifecycle
+basic_type/lifecycle/lifecycle_test
 basic_type/polymorphism/polymorphism
+basic_type/polymorphism/polymorphism_test
 basic_type/function_lambda/function_lambda
+basic_type/function_lambda/function_lambda_test
 basic_type/modern_types/modern_types
 basic_type/modern_types/modern_types_test
 basic_type/nullptr_void/nullptr_void
+basic_type/nullptr_void/nullptr_void_test
 
 # 预编译头
 *.gch
