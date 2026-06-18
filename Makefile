@@ -1,8 +1,8 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra
 
-# 自动发现 ipc/ 和 basic_type/ 下的所有子项目
-SUBDIRS := $(wildcard ipc/* basic_type/*)
+# 自动发现 ipc/、basic_type/ 和 object_model/ 下的所有子项目
+SUBDIRS := $(wildcard ipc/* basic_type/* object_model/*)
 
 .PHONY: all clean test $(SUBDIRS)
 

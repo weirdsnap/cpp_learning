@@ -82,3 +82,15 @@ vcpkg_installed/
 # 测试/缓存
 Testing/
 .cache/
+
+# object_model 可执行文件
+object_model/virtual_dispatch/virtual_dispatch
+object_model/virtual_dispatch/virtual_dispatch_test
+object_model/name_hiding/name_hiding
+object_model/name_hiding/name_hiding_test
+object_model/conversion_functions/conversion_functions
+object_model/conversion_functions/conversion_functions_test
+object_model/nvi/nvi
+object_model/nvi/nvi_test
+object_model/virtual_inheritance/virtual_inheritance
+object_model/virtual_inheritance/virtual_inheritance_test

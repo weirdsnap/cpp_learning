@@ -22,6 +22,12 @@
 │   ├── function_lambda/    # operator bool、函数对象、Lambda、求值顺序
 │   ├── modern_types/       # variant / optional / 转发引用
 │   └── nullptr_void/       # NULL / nullptr / void*
+├── object_model/           # 对象模型与内存布局相关验证（博客 ch02）
+│   ├── virtual_dispatch/   # vtable/vptr、构造/析构中虚调用、默认参数、final
+│   ├── name_hiding/        # 名字隐藏、数组引用 vs 指针重载
+│   ├── conversion_functions/ # 转换函数 explicit / const / 二义性
+│   ├── nvi/                # NVI（Non-Virtual Interface）惯用法
+│   └── virtual_inheritance/ # 虚继承与菱形继承
 └── ipc/                    # 进程间通信主题
     ├── shm-basic/          # POSIX 共享内存基础示例
     └── shm-ringbuffer/     # POSIX 共享内存环形缓冲区
@@ -77,9 +83,9 @@ cd ipc/shm-ringbuffer
 
 ## 添加新的子项目
 
-1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/` 或 `basic_type/your-topic/`
+1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/`、`basic_type/your-topic/` 或 `object_model/your-topic/`
 2. 子文件夹内创建 `Makefile`
-3. 根 `Makefile` 会自动发现 `ipc/*` 和 `basic_type/*` 下的所有子目录
+3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*` 和 `object_model/*` 下的所有子目录
 4. 运行 `make` 即可编译新项目
 
 ## 运行测试
