@@ -56,3 +56,27 @@ TEST_CASE("const 变量不一定是编译期常量") {
     CHECK((std::is_const_v<decltype(runtime_const)>));
     CHECK(runtime_const == 42);
 }
+
+// 静态变量默认零初始化测试
+static int g_static_int;
+static double g_static_double;
+static int* g_static_ptr;
+static bool g_static_bool;
+static int g_static_arr[3];
+
+void local_static_init() {
+    static int s;
+    CHECK(s == 0);
+}
+
+TEST_CASE("静态存储期变量默认零初始化") {
+    CHECK(g_static_int == 0);
+    CHECK(g_static_double == 0.0);
+    CHECK(g_static_ptr == nullptr);
+    CHECK(g_static_bool == false);
+    CHECK(g_static_arr[0] == 0);
+    CHECK(g_static_arr[1] == 0);
+    CHECK(g_static_arr[2] == 0);
+
+    local_static_init();
+}
