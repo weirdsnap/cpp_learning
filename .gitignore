@@ -94,3 +94,15 @@ object_model/nvi/nvi
 object_model/nvi/nvi_test
 object_model/virtual_inheritance/virtual_inheritance
 object_model/virtual_inheritance/virtual_inheritance_test
+
+# memory_mgmt 可执行文件
+memory_mgmt/smart_pointers/smart_pointers
+memory_mgmt/smart_pointers/smart_pointers_test
+memory_mgmt/ownership/ownership
+memory_mgmt/ownership/ownership_test
+memory_mgmt/move_elision/move_elision
+memory_mgmt/move_elision/move_elision_test
+memory_mgmt/raii/raii
+memory_mgmt/raii/raii_test
+memory_mgmt/initialization/initialization
+memory_mgmt/initialization/initialization_test

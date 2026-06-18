@@ -28,6 +28,12 @@
 │   ├── conversion_functions/ # 转换函数 explicit / const / 二义性
 │   ├── nvi/                # NVI（Non-Virtual Interface）惯用法
 │   └── virtual_inheritance/ # 虚继承与菱形继承
+├── memory_mgmt/            # 内存管理与资源安全相关验证（博客 ch03）
+│   ├── smart_pointers/     # shared_ptr / weak_ptr / unique_ptr / 自定义删除器
+│   ├── ownership/          # 拷贝/移动、三/五/零法则、特殊成员函数
+│   ├── move_elision/       # 移动语义、RVO/NRVO、返回值优化
+│   ├── raii/               # new/delete vs malloc/free、RAII 代理与异常安全
+│   └── initialization/     # 成员初始化顺序、模板静态成员按需实例化
 └── ipc/                    # 进程间通信主题
     ├── shm-basic/          # POSIX 共享内存基础示例
     └── shm-ringbuffer/     # POSIX 共享内存环形缓冲区
@@ -83,9 +89,9 @@ cd ipc/shm-ringbuffer
 
 ## 添加新的子项目
 
-1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/`、`basic_type/your-topic/` 或 `object_model/your-topic/`
+1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/`、`basic_type/your-topic/`、`object_model/your-topic/` 或 `memory_mgmt/your-topic/`
 2. 子文件夹内创建 `Makefile`
-3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*` 和 `object_model/*` 下的所有子目录
+3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*`、`object_model/*` 和 `memory_mgmt/*` 下的所有子目录
 4. 运行 `make` 即可编译新项目
 
 ## 运行测试
