@@ -106,3 +106,8 @@ memory_mgmt/raii/raii
 memory_mgmt/raii/raii_test
 memory_mgmt/initialization/initialization
 memory_mgmt/initialization/initialization_test
+
+# ipc/shm-chunk 可执行文件
+ipc/shm-chunk/shm_chunk_productor
+ipc/shm-chunk/shm_chunk_consumer
+ipc/shm-chunk/shm_chunk_test
