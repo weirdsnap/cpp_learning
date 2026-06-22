@@ -45,6 +45,8 @@
 │   ├── forwarding/         # 万能引用、完美转发
 │   ├── variadic/           # 可变参数模板、折叠表达式
 │   └── dependent_base/     # 模板基类依赖名查找
+├── bit_manipulation/       # 位运算惯用法
+│   └── basic_ops/          # 2 的幂、lowbit、位掩码、对齐、popcount
 └── ipc/                    # 进程间通信主题
     ├── shm-basic/          # POSIX 共享内存基础示例
     └── shm-ringbuffer/     # POSIX 共享内存环形缓冲区
@@ -100,9 +102,9 @@ cd ipc/shm-ringbuffer
 
 ## 添加新的子项目
 
-1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/`、`basic_type/your-topic/`、`object_model/your-topic/`、`memory_mgmt/your-topic/`、`data_validation/your-topic/` 或 `templates/your-topic/`
+1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/`、`basic_type/your-topic/`、`object_model/your-topic/`、`memory_mgmt/your-topic/`、`data_validation/your-topic/`、`templates/your-topic/` 或 `bit_manipulation/your-topic/`
 2. 子文件夹内创建 `Makefile`
-3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*`、`object_model/*`、`memory_mgmt/*`、`data_validation/*` 和 `templates/*` 下的所有子目录
+3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*`、`object_model/*`、`memory_mgmt/*`、`data_validation/*`、`templates/*` 和 `bit_manipulation/*` 下的所有子目录
 4. 运行 `make` 即可编译新项目
 
 ## 运行测试

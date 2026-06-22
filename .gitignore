@@ -133,3 +133,7 @@ templates/variadic/variadic
 templates/variadic/variadic_test
 templates/dependent_base/dependent_base
 templates/dependent_base/dependent_base_test
+
+# bit_manipulation 可执行文件
+bit_manipulation/basic_ops/bit_ops
+bit_manipulation/basic_ops/bit_ops_test
