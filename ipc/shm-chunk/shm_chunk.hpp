@@ -10,6 +10,15 @@
 #include <thread>
 #include <chrono>
 
+// 共享内存被划分为三个区域：
+//   1. ShmHeader：控制区，保存描述符 ring 和 chunk 空闲 ring 的原子索引。
+//   2. desc_ring[DESC_COUNT]：ChunkDesc 描述符 ring，Producer 投递，Consumer 取走。
+//   3. free_array[CHUNK_COUNT]：chunk 空闲 ring，存放当前可复用的 chunk_id。
+//   4. chunk_pool[CHUNK_COUNT]：Chunk 数据区，每个 Chunk 16MB。
+//
+// Producer 流程：alloc_chunk -> 写入 chunk_pool[chunk_id] -> 生成 ChunkDesc -> push_desc。
+// Consumer 流程：pop_desc -> 读取 chunk_pool[desc.chunk_id] -> 校验 CRC -> return_chunk。
+
 inline uint32_t crc32(const void* data, size_t len) {
     // 余数方法校验
     static uint32_t table[256];
@@ -37,27 +46,27 @@ inline constexpr size_t PAGE_SIZE     = 4096;
 inline constexpr const char* SHM_CHUNK_NAME = "/my_shm_chunk";
 
 struct ChunkDesc {
-    uint32_t chunk_id;        // 指向 Chunk Pool 的编号
-    uint32_t payload_len;     // 实际用了多少字节
-    uint64_t timestamp_ns;    // 生产者时间戳
-    uint32_t crc32;           // 数据校验
-    uint16_t flags;           // bit0: 1=最后一块
-    uint16_t reserved;        // 填充
+    uint32_t chunk_id;        // 数据所在 Chunk 的编号（索引 chunk_pool）
+    uint32_t payload_len;     // 本 Chunk 有效载荷字节数
+    uint64_t timestamp_ns;    // 生产者写入时间戳
+    uint32_t crc32;           // 本 Chunk 数据的 CRC32 校验值
+    uint16_t flags;           // bit0=1 表示整个数据流的最后一块
+    uint16_t reserved;        // 填充对齐
 };
 static_assert(sizeof(ChunkDesc) == 24);         // 检查大小是否与预期一致
 
 struct alignas(4096) Chunk {
-    char data[CHUNK_SIZE];
+    char data[CHUNK_SIZE];    // 16MB 原始数据缓冲区
 };
 
 struct alignas(64) ShmHeader {
-    std::atomic<uint64_t> desc_write_idx{0};
+    std::atomic<uint64_t> desc_write_idx{0};    // 描述符 ring 写索引（Producer 用）
     char pad1[56];
-    std::atomic<uint64_t> desc_read_idx{0};
+    std::atomic<uint64_t> desc_read_idx{0};     // 描述符 ring 读索引（Consumer 用）
     char pad2[56];
-    std::atomic<uint32_t> chunk_alloc_idx{0};   // 下一个可分配的 chunk id 槽位
+    std::atomic<uint32_t> chunk_alloc_idx{0};   // chunk 空闲 ring 读索引，分配 chunk
     char pad3[60];
-    std::atomic<uint32_t> chunk_return_idx{0};  // 下一个归还 chunk id 的槽位
+    std::atomic<uint32_t> chunk_return_idx{0};  // chunk 空闲 ring 写索引，归还 chunk
     char pad4[60];
     uint32_t chunk_count{CHUNK_COUNT};
     uint32_t chunk_size{static_cast<uint32_t>(CHUNK_SIZE)};
