@@ -16,7 +16,7 @@
 #include <emmintrin.h>
 #include <iostream>
 
-inline constexpr size_t BENCH_STREAM_SIZE = 100ULL * 1024 * 1024;  // 100MB
+inline constexpr size_t BENCH_STREAM_SIZE = 1000ULL * 1024 * 1024;  // 1000MB
 
 using ns = std::chrono::nanoseconds;
 using hr_clock = std::chrono::high_resolution_clock;
