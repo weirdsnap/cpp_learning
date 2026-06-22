@@ -111,6 +111,7 @@ memory_mgmt/initialization/initialization_test
 ipc/shm-chunk/shm_chunk_productor
 ipc/shm-chunk/shm_chunk_consumer
 ipc/shm-chunk/shm_chunk_test
+ipc/shm-chunk/shm_chunk_bench
 
 # data_validation 可执行文件
 data_validation/crc32/crc32
