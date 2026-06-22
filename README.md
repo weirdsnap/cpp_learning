@@ -34,6 +34,10 @@
 │   ├── move_elision/       # 移动语义、RVO/NRVO、返回值优化
 │   ├── raii/               # new/delete vs malloc/free、RAII 代理与异常安全
 │   └── initialization/     # 成员初始化顺序、模板静态成员按需实例化
+├── data_validation/        # 数据校验与纠错
+│   ├── crc32/              # CRC32：检错但不纠错
+│   ├── parity_xor/         # 奇偶校验与 XOR 校验和
+│   └── hamming/            # Hamming(7,4)：可纠正单比特错误
 └── ipc/                    # 进程间通信主题
     ├── shm-basic/          # POSIX 共享内存基础示例
     └── shm-ringbuffer/     # POSIX 共享内存环形缓冲区
@@ -89,9 +93,9 @@ cd ipc/shm-ringbuffer
 
 ## 添加新的子项目
 
-1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/`、`basic_type/your-topic/`、`object_model/your-topic/` 或 `memory_mgmt/your-topic/`
+1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/`、`basic_type/your-topic/`、`object_model/your-topic/`、`memory_mgmt/your-topic/` 或 `data_validation/your-topic/`
 2. 子文件夹内创建 `Makefile`
-3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*`、`object_model/*` 和 `memory_mgmt/*` 下的所有子目录
+3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*`、`object_model/*`、`memory_mgmt/*` 和 `data_validation/*` 下的所有子目录
 4. 运行 `make` 即可编译新项目
 
 ## 运行测试

@@ -111,3 +111,11 @@ memory_mgmt/initialization/initialization_test
 ipc/shm-chunk/shm_chunk_productor
 ipc/shm-chunk/shm_chunk_consumer
 ipc/shm-chunk/shm_chunk_test
+
+# data_validation 可执行文件
+data_validation/crc32/crc32
+data_validation/crc32/crc32_test
+data_validation/parity_xor/parity_xor
+data_validation/parity_xor/parity_xor_test
+data_validation/hamming/hamming
+data_validation/hamming/hamming_test

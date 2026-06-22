@@ -11,6 +11,7 @@
 #include <chrono>
 
 inline uint32_t crc32(const void* data, size_t len) {
+    // 余数方法校验
     static uint32_t table[256];
     static bool init = false;
     if (!init) {
@@ -43,7 +44,7 @@ struct ChunkDesc {
     uint16_t flags;           // bit0: 1=最后一块
     uint16_t reserved;        // 填充
 };
-static_assert(sizeof(ChunkDesc) == 24);
+static_assert(sizeof(ChunkDesc) == 24);         // 检查大小是否与预期一致
 
 struct alignas(4096) Chunk {
     char data[CHUNK_SIZE];
