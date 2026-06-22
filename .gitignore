@@ -119,3 +119,17 @@ data_validation/parity_xor/parity_xor
 data_validation/parity_xor/parity_xor_test
 data_validation/hamming/hamming
 data_validation/hamming/hamming_test
+
+# templates 可执行文件
+templates/deduction/deduction
+templates/deduction/deduction_test
+templates/overload/overload
+templates/overload/overload_test
+templates/specialization/specialization
+templates/specialization/specialization_test
+templates/forwarding/forwarding
+templates/forwarding/forwarding_test
+templates/variadic/variadic
+templates/variadic/variadic_test
+templates/dependent_base/dependent_base
+templates/dependent_base/dependent_base_test
