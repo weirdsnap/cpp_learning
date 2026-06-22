@@ -19,7 +19,7 @@
 #include <thread>
 #include <algorithm>
 
-inline constexpr size_t STREAM_SIZE = 100ULL * 1024 * 1024;  // 100MB
+inline constexpr size_t STREAM_SIZE = 1024ULL * 1024 * 1024;  // 1024MB = 1GB
 
 int main(int argc, char* argv[]) {
     int stream_count = (argc > 1) ? std::atoi(argv[1]) : 1;
