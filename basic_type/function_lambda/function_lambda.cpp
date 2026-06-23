@@ -5,7 +5,7 @@
 // 验证 ch01 中关于函数对象与求值顺序的知识点：
 // 05 隐式转换 bool / operator bool
 // 16 函数指针与仿函数
-// 17 Lambda 按值捕获的 const 性
+// 17 Lambda 捕获：值、引用、this 和陷阱
 // 18 函数参数求值顺序未指定
 // 19 花括号列表 vs 圆括号参数求值顺序
 
@@ -70,23 +70,46 @@ void test_function_vs_functor() {
     std::cout << "\n";
 }
 
-// 17 Lambda 按值捕获的 const 性
+// 17 Lambda 捕获：值、引用、this 和陷阱
+int g_lambda_global = 1;
+
 void test_lambda_capture() {
-    std::cout << "=== 17 Lambda 按值捕获的 const 性 ===\n";
+    std::cout << "=== 17 Lambda 捕获 ===\n";
+
+    // 按值捕获：复制一份，外部变化不影响 lambda 内部
     int x = 10;
-
     auto f1 = [x]() {
-        // x = 20;  // 编译错误：默认 lambda operator() 是 const，x 表现为 const
+        // x = 20;  // 编译错误：默认 lambda operator() 是 const
         return x;
     };
-    std::cout << "  非 mutable lambda 内 x = " << f1() << "\n";
+    x = 100;
+    std::cout << "  按值捕获，外部 x 改为 100 后 lambda 仍返回 " << f1() << "\n";
 
+    // mutable：修改闭包内部副本，外部不变
     auto f2 = [x]() mutable {
-        x = 20;  // 修改的是闭包内部副本
+        x = 20;
         return x;
     };
-    std::cout << "  mutable lambda 内 x 改为 " << f2() << "\n";
-    std::cout << "  外部 x 仍为 " << x << "\n\n";
+    std::cout << "  mutable lambda 内 x 改为 " << f2() << "，外部 x 为 " << x << "\n";
+
+    // 按引用捕获：lambda 内修改会影响外部
+    int y = 10;
+    auto f3 = [&y]() {
+        y = 30;
+    };
+    f3();
+    std::cout << "  按引用捕获后外部 y 变为 " << y << "\n";
+
+    // 全局变量：不需要也不能捕获
+    auto f4 = [](int b) { return g_lambda_global + b; };
+    std::cout << "  lambda 中使用全局变量 g_lambda_global: " << f4(4) << "\n";
+
+    // 隐式捕获
+    int a = 1, b = 2;
+    auto f5 = [=]() { return a + b; };
+    auto f6 = [&]() { a++; b++; };
+    f6();
+    std::cout << "  隐式值捕获 [=] 结果 " << f5() << "，隐式引用捕获 [&] 后 a+b=" << (a + b) << "\n\n";
 }
 
 int global_counter = 0;
