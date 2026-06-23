@@ -176,4 +176,17 @@ inline bool pop_desc(const ShmLayout& layout, ChunkDesc& desc) {
     }
 }
 
+// 构造可校验的测试载荷。
+// 前 4 字节写入当前 Chunk 的序号 seq，便于 Consumer 验证顺序；
+// 后续字节用 (offset + i) & 0xFF 递增填充，使每份数据可预测、可自校验。
+// 注意：这是 benchmark / 测试用的自生成数据；真实场景下应替换为
+// 从文件、socket 或采集设备读取的实际输入。
+inline void fill_test_payload(Chunk& chunk, uint32_t seq, size_t offset, size_t len) {
+    uint8_t* dst = reinterpret_cast<uint8_t*>(chunk.data);
+    std::memcpy(dst, &seq, sizeof(seq));
+    for (size_t i = sizeof(seq); i < len; ++i) {
+        dst[i] = static_cast<uint8_t>((offset + i) & 0xFFu);
+    }
+}
+
 #endif // SHM_CHUNK_H

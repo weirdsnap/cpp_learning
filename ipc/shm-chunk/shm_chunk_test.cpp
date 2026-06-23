@@ -63,11 +63,7 @@ TEST_CASE("chunk + ring 100MB 端到端：拆块、CRC、零拷贝、复用") {
             size_t remaining = TEST_STREAM_SIZE - offset;
             size_t this_len = std::min(CHUNK_SIZE, remaining);
 
-            uint8_t* dst = reinterpret_cast<uint8_t*>(chunk.data);
-            std::memcpy(dst, &seq, sizeof(seq));
-            for (size_t i = sizeof(seq); i < this_len; ++i) {
-                dst[i] = static_cast<uint8_t>((offset + i) & 0xFFu);
-            }
+            fill_test_payload(chunk, seq, offset, this_len);
 
             ChunkDesc desc{};
             desc.chunk_id = chunk_id;

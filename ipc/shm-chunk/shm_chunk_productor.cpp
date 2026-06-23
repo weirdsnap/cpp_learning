@@ -1,6 +1,12 @@
 // chunk + ring 结合的共享内存生产者
+//
+// 这里的“流”指一次要传输的完整字节序列（当前为 1GB），逻辑上连续，
+// 物理上被切成多个 16MB 的 Chunk 通过共享内存发送。
+// Consumer 通过 desc_ring 里的描述符按顺序重组，最后一块的 flags.bit0 = 1
+// 标识当前流的边界。
+//
 // 关键点：
-// 1. 100MB 数据流拆成多个 Chunk
+// 1. 1GB 数据流拆成多个 Chunk
 // 2. 每个 Chunk 计算 CRC32
 // 3. 通过 desc_ring 传递元数据
 // 4. 最后一块标记 flags.bit0 = 1
@@ -59,10 +65,15 @@ int main(int argc, char* argv[]) {
               << " MB，共 " << stream_count << " 次...\n";
 
     auto now = std::chrono::steady_clock::now;
-    for (int s = 0; s < stream_count; ++s) {
-        size_t offset = 0;
-        uint32_t seq = 0;
 
+    // 外层循环控制发送多少份完整的流；
+    // stream_count 由命令行参数指定，默认只发一份 1GB 的流。
+    for (int s = 0; s < stream_count; ++s) {
+        size_t offset = 0;  // 当前流内已发送的字节数
+        uint32_t seq = 0;   // 当前流内 Chunk 序号，从 0 开始递增
+
+        // 内层循环：把一份流切成多个 Chunk 发送。
+        // 当 16 个 Chunk 全被 Consumer 占用时，alloc_chunk 会自旋等待。
         while (offset < STREAM_SIZE) {
             uint32_t chunk_id = alloc_chunk(layout);
             Chunk& chunk = layout.chunk_pool[chunk_id];
@@ -70,13 +81,9 @@ int main(int argc, char* argv[]) {
             size_t remaining = STREAM_SIZE - offset;
             size_t this_len = std::min(CHUNK_SIZE, remaining);
 
-            // 构造可校验的载荷：前 4 字节为序号，后续填充递增字节
-            uint8_t* dst = reinterpret_cast<uint8_t*>(chunk.data);
-            std::memcpy(dst, &seq, sizeof(seq));
-            for (size_t i = sizeof(seq); i < this_len; ++i) {
-                dst[i] = static_cast<uint8_t>((offset + i) & 0xFFu);
-            }
+            fill_test_payload(chunk, seq, offset, this_len);
 
+            // 构造描述符，描述这个 Chunk 的元数据
             ChunkDesc desc{};
             desc.chunk_id = chunk_id;
             desc.payload_len = static_cast<uint32_t>(this_len);
@@ -84,6 +91,7 @@ int main(int argc, char* argv[]) {
                 std::chrono::duration_cast<std::chrono::nanoseconds>(
                     now().time_since_epoch()).count());
             desc.crc32 = crc32(chunk.data, this_len);
+            // flags.bit0 = 1 表示当前流已传输完毕，Consumer 据此判定边界
             desc.flags = (offset + this_len >= STREAM_SIZE) ? 1u : 0u;
 
             push_desc(layout, desc);

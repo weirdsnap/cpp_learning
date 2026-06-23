@@ -1,5 +1,5 @@
 // chunk + ring 共享内存端到端性能基准测试
-// 测量 100MB 数据流从 Producer 写入到 Consumer 读取完成的总吞吐
+// 测量 1000MB 数据流从 Producer 写入到 Consumer 读取完成的总吞吐
 
 #include "shm_chunk.hpp"
 
@@ -42,12 +42,8 @@ static void producer(ShmLayout layout) {
 
         size_t this_len = std::min(CHUNK_SIZE, BENCH_STREAM_SIZE - offset);
 
-        // 填充数据：前 4 字节为序号，其余为递增字节模式
-        uint8_t* dst = reinterpret_cast<uint8_t*>(layout.chunk_pool[cid].data);
-        std::memcpy(dst, &seq, sizeof(seq));
-        for (size_t i = sizeof(seq); i < this_len; ++i) {
-            dst[i] = static_cast<uint8_t>((offset + i) & 0xFFu);
-        }
+        // 填充可校验的测试数据：前 4 字节为序号，其余为递增字节模式
+        fill_test_payload(layout.chunk_pool[cid], seq, offset, this_len);
 
         // 等待 desc ring 空间
         uint64_t dw = layout.header->desc_write_idx.load(std::memory_order_relaxed);
