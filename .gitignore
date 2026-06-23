@@ -138,3 +138,8 @@ templates/dependent_base/dependent_base_test
 # bit_manipulation 可执行文件
 bit_manipulation/basic_ops/bit_ops
 bit_manipulation/basic_ops/bit_ops_test
+
+# ipc/socket 可执行文件
+ipc/socket/socket_server
+ipc/socket/socket_client
+ipc/socket/socket_test
