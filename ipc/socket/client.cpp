@@ -1,5 +1,12 @@
 // 简单的 TCP echo client
-// 连接 server，发送一条消息，接收并打印返回内容。
+//
+// 这个示例展示 POSIX socket 客户端的核心流程：socket / connect / write / read。
+// 它连接 server，发送一条消息，接收并打印返回内容。
+//
+// 关键知识点：
+// 1. `inet_pton` 把点分十进制字符串（如 "127.0.0.1"）转成网络字节序的二进制地址。
+// 2. `connect` 成功后，fd 就可以用 read/write 或 send/recv 读写。
+// 3. 和 server 一样，这个示例没有处理短读/短写。完整做法参考 ipc/minichat。
 
 #include <arpa/inet.h>
 #include <cstdio>
@@ -40,7 +47,7 @@ int main(int argc, char* argv[]) {
 
     std::cout << "[Client] 已连接到 127.0.0.1:" << port << "\n";
 
-    // 4. 发送消息
+    // 4. 发送消息。注意：write 返回值可能小于请求长度，这里简化处理
     size_t msg_len = std::strlen(msg);
     ssize_t sent = write(fd, msg, msg_len);
     if (sent == -1) {
@@ -49,7 +56,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // 5. 接收响应
+    // 5. 接收响应。read 返回 0 表示服务器关闭连接
     char buffer[1024];
     ssize_t n = read(fd, buffer, sizeof(buffer) - 1);
     if (n > 0) {

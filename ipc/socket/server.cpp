@@ -1,6 +1,13 @@
 // 简单的 TCP echo server
-// 监听指定端口，接收一个连接，把收到的内容原样返回。
-// 收到 "quit" 或客户端关闭连接时退出。
+//
+// 这个示例展示 POSIX socket 最核心的几个 API：socket / bind / listen / accept / read / write。
+// 它只处理一个客户端连接，把收到的内容原样返回。
+//
+// 关键知识点：
+// 1. TCP 是流式协议，没有消息边界。read 一次可能只读到一部分数据，write 也可能只发一部分。
+//    生产环境需要像 ipc/minichat 那样用 SendAll/RecvAll 循环保证完整性。
+// 2. `SO_REUSEADDR` 让端口在进程重启后能立即复用，避免 "Address already in use"。
+// 3. `htonl` / `htons` 把主机字节序转成网络字节序（大端），这是跨机通信的通用约定。
 
 #include <arpa/inet.h>
 #include <cstdio>
@@ -14,7 +21,7 @@
 int main(int argc, char* argv[]) {
     int port = (argc > 1) ? std::atoi(argv[1]) : 12345;
 
-    // 1. 创建监听 socket
+    // 1. 创建监听 socket：AF_INET = IPv4，SOCK_STREAM = TCP
     int listen_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (listen_fd == -1) {
         perror("socket");
@@ -41,7 +48,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // 4. 开始监听
+    // 4. 开始监听，backlog = 1 表示内核队列中最多保留一个未完成连接
     if (listen(listen_fd, 1) == -1) {
         perror("listen");
         close(listen_fd);
@@ -50,7 +57,7 @@ int main(int argc, char* argv[]) {
 
     std::cout << "[Server] 监听 127.0.0.1:" << port << "\n";
 
-    // 5. 接受一个连接
+    // 5. 接受一个连接；accept 返回新的 conn_fd 用于和客户端通信
     sockaddr_in client_addr{};
     socklen_t client_len = sizeof(client_addr);
     int conn_fd = accept(listen_fd, reinterpret_cast<sockaddr*>(&client_addr), &client_len);
@@ -65,6 +72,7 @@ int main(int argc, char* argv[]) {
     // 6. echo 循环
     char buffer[1024];
     while (true) {
+        // read 返回 0 表示对端关闭连接；返回 -1 表示出错
         ssize_t n = read(conn_fd, buffer, sizeof(buffer) - 1);
         if (n <= 0) {
             std::cout << "[Server] 客户端断开连接\n";
@@ -78,7 +86,7 @@ int main(int argc, char* argv[]) {
             break;
         }
 
-        // 原样返回
+        // 原样返回。注意：这里没处理 write 只发送一部分的情况
         write(conn_fd, buffer, static_cast<size_t>(n));
     }
 

@@ -143,3 +143,13 @@ bit_manipulation/basic_ops/bit_ops_test
 ipc/socket/socket_server
 ipc/socket/socket_client
 ipc/socket/socket_test
+
+# ipc/minichat 可执行文件
+ipc/minichat/minichat_server
+ipc/minichat/minichat_client
+ipc/minichat/minichat_test
+
+# ipc/tinyrpc 可执行文件
+ipc/tinyrpc/tinyrpc_server
+ipc/tinyrpc/tinyrpc_client
+ipc/tinyrpc/tinyrpc_test
