@@ -39,6 +39,8 @@ basic_type/modern_types/modern_types
 basic_type/modern_types/modern_types_test
 basic_type/nullptr_void/nullptr_void
 basic_type/nullptr_void/nullptr_void_test
+basic_type/integer_promotion/integer_promotion
+basic_type/integer_promotion/integer_promotion_test
 
 # 预编译头
 *.gch
@@ -94,6 +96,8 @@ object_model/nvi/nvi
 object_model/nvi/nvi_test
 object_model/virtual_inheritance/virtual_inheritance
 object_model/virtual_inheritance/virtual_inheritance_test
+object_model/override_rtti/override_rtti
+object_model/override_rtti/override_rtti_test
 
 # memory_mgmt 可执行文件
 memory_mgmt/smart_pointers/smart_pointers
@@ -134,6 +138,8 @@ templates/variadic/variadic
 templates/variadic/variadic_test
 templates/dependent_base/dependent_base
 templates/dependent_base/dependent_base_test
+templates/if_constexpr/if_constexpr
+templates/if_constexpr/if_constexpr_test
 
 # bit_manipulation 可执行文件
 bit_manipulation/basic_ops/bit_ops
@@ -153,3 +159,11 @@ ipc/minichat/minichat_test
 ipc/tinyrpc/tinyrpc_server
 ipc/tinyrpc/tinyrpc_client
 ipc/tinyrpc/tinyrpc_test
+
+# concurrency 可执行文件
+concurrency/basic_sync/basic_sync
+concurrency/basic_sync/basic_sync_test
+
+# exception_safety 可执行文件
+exception_safety/exception_ub/exception_ub
+exception_safety/exception_ub/exception_ub_test

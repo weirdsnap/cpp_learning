@@ -27,7 +27,8 @@
 │   ├── name_hiding/        # 名字隐藏、数组引用 vs 指针重载
 │   ├── conversion_functions/ # 转换函数 explicit / const / 二义性
 │   ├── nvi/                # NVI（Non-Virtual Interface）惯用法
-│   └── virtual_inheritance/ # 虚继承与菱形继承
+│   ├── virtual_inheritance/ # 虚继承与菱形继承
+│   └── override_rtti/      # override / typeid / dynamic_cast（博客 ch05）
 ├── memory_mgmt/            # 内存管理与资源安全相关验证（博客 ch03）
 │   ├── smart_pointers/     # shared_ptr / weak_ptr / unique_ptr / 自定义删除器
 │   ├── ownership/          # 拷贝/移动、三/五/零法则、特殊成员函数
@@ -45,6 +46,10 @@
 │   ├── forwarding/         # 万能引用、完美转发
 │   ├── variadic/           # 可变参数模板、折叠表达式
 │   └── dependent_base/     # 模板基类依赖名查找
+├── concurrency/            # 并发与内存模型相关验证（博客 ch06）
+│   └── basic_sync/         # mutex / lock_guard / unique_lock / atomic / 内存序
+├── exception_safety/       # 异常安全与未定义行为（博客 ch08）+ 编译期元编程（博客 ch09）
+│   └── exception_ub/       # noexcept / 析构异常 / UB / Copy-and-Swap / placement new
 ├── bit_manipulation/       # 位运算惯用法
 │   └── basic_ops/          # 2 的幂、lowbit、位掩码、对齐、popcount
 └── ipc/                    # 进程间通信主题

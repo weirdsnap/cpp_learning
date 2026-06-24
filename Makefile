@@ -1,8 +1,8 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra
 
-# 自动发现 ipc/、basic_type/、object_model/、memory_mgmt/、data_validation/、templates/ 和 bit_manipulation/ 下包含 Makefile 的子项目
-SUBDIRS := $(foreach dir,$(wildcard ipc/* basic_type/* object_model/* memory_mgmt/* data_validation/* templates/* bit_manipulation/*),$(if $(wildcard $(dir)/Makefile),$(dir),))
+# 自动发现 ipc/、basic_type/、object_model/、memory_mgmt/、data_validation/、templates/、bit_manipulation/、concurrency/ 和 exception_safety/ 下包含 Makefile 的子项目
+SUBDIRS := $(foreach dir,$(wildcard ipc/* basic_type/* object_model/* memory_mgmt/* data_validation/* templates/* bit_manipulation/* concurrency/* exception_safety/*),$(if $(wildcard $(dir)/Makefile),$(dir),))
 
 .PHONY: all clean test $(SUBDIRS)
 
