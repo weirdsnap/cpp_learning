@@ -21,13 +21,18 @@
 │   ├── polymorphism/       # 静态/动态类型、enum class、对象切片
 │   ├── function_lambda/    # operator bool、函数对象、Lambda、求值顺序
 │   ├── modern_types/       # variant / optional / 转发引用
-│   └── nullptr_void/       # NULL / nullptr / void*
+│   ├── nullptr_void/       # NULL / nullptr / void*
+│   ├── string_ops/         # std::string 三种操作风格（C风格/成员函数/STL算法）
+│   ├── bool_conversion/    # 隐式 bool 转换 / explicit operator bool / Safe Bool Idiom
+│   ├── integer_promotion/  # 整数提升与通常算术转换（ch01/28）
+│   └── type_alias/         # 类型别名 using / typedef（ch01/29）
 ├── object_model/           # 对象模型与内存布局相关验证（博客 ch02）
 │   ├── virtual_dispatch/   # vtable/vptr、构造/析构中虚调用、默认参数、final
 │   ├── name_hiding/        # 名字隐藏、数组引用 vs 指针重载
 │   ├── conversion_functions/ # 转换函数 explicit / const / 二义性
 │   ├── nvi/                # NVI（Non-Virtual Interface）惯用法
 │   ├── virtual_inheritance/ # 虚继承与菱形继承
+│   ├── runtime_polymorphism/ # 运行时多态概述 + vtable/vptr 布局（博客 ch05）
 │   └── override_rtti/      # override / typeid / dynamic_cast（博客 ch05）
 ├── memory_mgmt/            # 内存管理与资源安全相关验证（博客 ch03）
 │   ├── smart_pointers/     # shared_ptr / weak_ptr / unique_ptr / 自定义删除器
@@ -45,16 +50,21 @@
 │   ├── specialization/     # 全特化、偏特化
 │   ├── forwarding/         # 万能引用、完美转发
 │   ├── variadic/           # 可变参数模板、折叠表达式
-│   └── dependent_base/     # 模板基类依赖名查找
+│   ├── dependent_base/     # 模板基类依赖名查找
+│   └── if_constexpr/       # if constexpr 与 IFNDR 陷阱（ch04/25）
 ├── concurrency/            # 并发与内存模型相关验证（博客 ch06）
 │   └── basic_sync/         # mutex / lock_guard / unique_lock / atomic / 内存序
 ├── exception_safety/       # 异常安全与未定义行为（博客 ch08）+ 编译期元编程（博客 ch09）
 │   └── exception_ub/       # noexcept / 析构异常 / UB / Copy-and-Swap / placement new
 ├── bit_manipulation/       # 位运算惯用法
 │   └── basic_ops/          # 2 的幂、lowbit、位掩码、对齐、popcount
-└── ipc/                    # 进程间通信主题
+└── ipc/                    # 进程间通信主题（博客 rpc/ch01、cpp/practices/ipc_*）
     ├── shm-basic/          # POSIX 共享内存基础示例
-    └── shm-ringbuffer/     # POSIX 共享内存环形缓冲区
+    ├── shm-ringbuffer/     # POSIX 共享内存环形缓冲区
+    ├── shm-chunk/          # 基于 Chunk 池的共享内存生产者/消费者/压测
+    ├── socket/             # TCP echo server/client
+    ├── minichat/           # Unix Domain Socket 帧协议回显
+    └── tinyrpc/            # UDS + JSON RPC 骨架
 ```
 
 ## 编译要求
@@ -109,7 +119,7 @@ cd ipc/shm-ringbuffer
 
 1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/`、`basic_type/your-topic/`、`object_model/your-topic/`、`memory_mgmt/your-topic/`、`data_validation/your-topic/`、`templates/your-topic/` 或 `bit_manipulation/your-topic/`
 2. 子文件夹内创建 `Makefile`
-3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*`、`object_model/*`、`memory_mgmt/*`、`data_validation/*`、`templates/*` 和 `bit_manipulation/*` 下的所有子目录
+3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*`、`object_model/*`、`memory_mgmt/*`、`data_validation/*`、`templates/*`、`bit_manipulation/*`、`concurrency/*` 和 `exception_safety/*` 下的所有子目录
 4. 运行 `make` 即可编译新项目
 
 ## 运行测试

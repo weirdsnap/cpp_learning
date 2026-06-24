@@ -43,6 +43,10 @@ basic_type/integer_promotion/integer_promotion
 basic_type/integer_promotion/integer_promotion_test
 basic_type/type_alias/type_alias
 basic_type/type_alias/type_alias_test
+basic_type/string_ops/string_ops
+basic_type/string_ops/string_ops_test
+basic_type/bool_conversion/bool_conversion
+basic_type/bool_conversion/bool_conversion_test
 
 # 预编译头
 *.gch
@@ -98,6 +102,8 @@ object_model/nvi/nvi
 object_model/nvi/nvi_test
 object_model/virtual_inheritance/virtual_inheritance
 object_model/virtual_inheritance/virtual_inheritance_test
+object_model/runtime_polymorphism/runtime_polymorphism
+object_model/runtime_polymorphism/runtime_polymorphism_test
 object_model/override_rtti/override_rtti
 object_model/override_rtti/override_rtti_test
 
