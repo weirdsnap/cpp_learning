@@ -41,6 +41,8 @@ basic_type/nullptr_void/nullptr_void
 basic_type/nullptr_void/nullptr_void_test
 basic_type/integer_promotion/integer_promotion
 basic_type/integer_promotion/integer_promotion_test
+basic_type/type_alias/type_alias
+basic_type/type_alias/type_alias_test
 
 # 预编译头
 *.gch
