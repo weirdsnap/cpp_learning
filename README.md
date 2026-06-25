@@ -58,6 +58,17 @@
 │   └── exception_ub/       # noexcept / 析构异常 / UB / Copy-and-Swap / placement new
 ├── bit_manipulation/       # 位运算惯用法
 │   └── basic_ops/          # 2 的幂、lowbit、位掩码、对齐、popcount
+├── leetcode/               # 算法题实现（博客 posts/leetcode/ch*）
+│   ├── lc4_median_sorted_arrays/       # LC 4 寻找两个正序数组的中位数
+│   ├── lc10_regular_expression_matching/ # LC 10 正则表达式匹配
+│   ├── lc14_longest_common_prefix/     # LC 14 最长公共前缀
+│   ├── lc42_trapping_rain_water/       # LC 42 接雨水
+│   ├── lc135_candy/                    # LC 135 分发糖果
+│   ├── lc2095_delete_middle_node/      # LC 2095 删除链表的中间节点
+│   ├── lc221_maximal_square/           # LC 221 最大正方形
+│   ├── lc3558_assign_edge_weights/     # LC 3558 边权赋值方案数 I
+│   ├── lc3559_assign_edge_weights/     # LC 3559 边权赋值方案数 II
+│   └── lc3612_process_string/          # LC 3612 用特殊操作处理字符串 I
 └── ipc/                    # 进程间通信主题（博客 rpc/ch01、cpp/practices/ipc_*）
     ├── shm-basic/          # POSIX 共享内存基础示例
     ├── shm-ringbuffer/     # POSIX 共享内存环形缓冲区
@@ -117,9 +128,9 @@ cd ipc/shm-ringbuffer
 
 ## 添加新的子项目
 
-1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/`、`basic_type/your-topic/`、`object_model/your-topic/`、`memory_mgmt/your-topic/`、`data_validation/your-topic/`、`templates/your-topic/` 或 `bit_manipulation/your-topic/`
+1. 在合适的主题目录下创建子文件夹，比如 `ipc/your-demo/`、`basic_type/your-topic/`、`object_model/your-topic/`、`memory_mgmt/your-topic/`、`data_validation/your-topic/`、`templates/your-topic/`、`bit_manipulation/your-topic/`、`leetcode/your-problem/` 等
 2. 子文件夹内创建 `Makefile`
-3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*`、`object_model/*`、`memory_mgmt/*`、`data_validation/*`、`templates/*`、`bit_manipulation/*`、`concurrency/*` 和 `exception_safety/*` 下的所有子目录
+3. 根 `Makefile` 会自动发现 `ipc/*`、`basic_type/*`、`object_model/*`、`memory_mgmt/*`、`data_validation/*`、`templates/*`、`bit_manipulation/*`、`concurrency/*`、`exception_safety/*`、`io_stream/*` 和 `leetcode/*` 下的所有子目录
 4. 运行 `make` 即可编译新项目
 
 ## 运行测试

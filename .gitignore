@@ -48,6 +48,10 @@ basic_type/string_ops/string_ops_test
 basic_type/bool_conversion/bool_conversion
 basic_type/bool_conversion/bool_conversion_test
 
+# basic_type/udl 可执行文件
+basic_type/udl/udl
+basic_type/udl/udl_test
+
 # 预编译头
 *.gch
 *.pch
@@ -175,3 +179,35 @@ concurrency/basic_sync/basic_sync_test
 # exception_safety 可执行文件
 exception_safety/exception_ub/exception_ub
 exception_safety/exception_ub/exception_ub_test
+
+# concurrency 补充可执行文件
+concurrency/atomic_ref/atomic_ref
+concurrency/atomic_ref/atomic_ref_test
+concurrency/sleep/sleep
+concurrency/sleep/sleep_test
+
+# io_stream 可执行文件
+io_stream/output_basics/output_basics
+io_stream/output_basics/output_basics_test
+io_stream/printf_format/printf_format
+io_stream/printf_format/printf_format_test
+io_stream/stringstream/stringstream
+io_stream/stringstream/stringstream_test
+
+# object_model 补充可执行文件
+object_model/pimpl/pimpl_demo
+object_model/pimpl/pimpl_test
+object_model/vptr_vbptr/vptr_vbptr
+object_model/vptr_vbptr/vptr_vbptr_test
+
+# leetcode 可执行文件
+leetcode/lc4_median_sorted_arrays/lc4_test
+leetcode/lc10_regular_expression_matching/lc10_test
+leetcode/lc14_longest_common_prefix/lc14_test
+leetcode/lc42_trapping_rain_water/lc42_test
+leetcode/lc135_candy/lc135_test
+leetcode/lc2095_delete_middle_node/lc2095_test
+leetcode/lc221_maximal_square/lc221_test
+leetcode/lc3558_assign_edge_weights/lc3558_test
+leetcode/lc3559_assign_edge_weights/lc3559_test
+leetcode/lc3612_process_string/lc3612_test
