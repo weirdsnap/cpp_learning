@@ -25,7 +25,8 @@
 │   ├── string_ops/         # std::string 三种操作风格（C风格/成员函数/STL算法）
 │   ├── bool_conversion/    # 隐式 bool 转换 / explicit operator bool / Safe Bool Idiom
 │   ├── integer_promotion/  # 整数提升与通常算术转换（ch01/28）
-│   └── type_alias/         # 类型别名 using / typedef（ch01/29）
+│   ├── type_alias/         # 类型别名 using / typedef（ch01/29）
+│   └── udl/                # 用户自定义字面量（UDL）
 ├── object_model/           # 对象模型与内存布局相关验证（博客 ch02）
 │   ├── virtual_dispatch/   # vtable/vptr、构造/析构中虚调用、默认参数、final
 │   ├── name_hiding/        # 名字隐藏、数组引用 vs 指针重载
@@ -33,7 +34,9 @@
 │   ├── nvi/                # NVI（Non-Virtual Interface）惯用法
 │   ├── virtual_inheritance/ # 虚继承与菱形继承
 │   ├── runtime_polymorphism/ # 运行时多态概述 + vtable/vptr 布局（博客 ch05）
-│   └── override_rtti/      # override / typeid / dynamic_cast（博客 ch05）
+│   ├── override_rtti/      # override / typeid / dynamic_cast（博客 ch05）
+│   ├── pimpl/              # Pimpl 惯用法与编译防火墙
+│   └── vptr_vbptr/         # vptr / vbptr 布局与虚继承内存模型
 ├── memory_mgmt/            # 内存管理与资源安全相关验证（博客 ch03）
 │   ├── smart_pointers/     # shared_ptr / weak_ptr / unique_ptr / 自定义删除器
 │   ├── ownership/          # 拷贝/移动、三/五/零法则、特殊成员函数
@@ -53,9 +56,15 @@
 │   ├── dependent_base/     # 模板基类依赖名查找
 │   └── if_constexpr/       # if constexpr 与 IFNDR 陷阱（ch04/25）
 ├── concurrency/            # 并发与内存模型相关验证（博客 ch06）
-│   └── basic_sync/         # mutex / lock_guard / unique_lock / atomic / 内存序
+│   ├── basic_sync/         # mutex / lock_guard / unique_lock / atomic / 内存序
+│   ├── atomic_ref/         # std::atomic_ref 与共享内存原子操作（C++20）
+│   └── sleep/              # 并发中的睡眠与定时等待
 ├── exception_safety/       # 异常安全与未定义行为（博客 ch08）+ 编译期元编程（博客 ch09）
 │   └── exception_ub/       # noexcept / 析构异常 / UB / Copy-and-Swap / placement new
+├── io_stream/              # 输入输出与格式化（博客 ch07）
+│   ├── output_basics/      # operator<<、格式化、精度、进制、boolalpha
+│   ├── printf_format/      # printf / std::format 格式化（C++20）
+│   └── stringstream/       # std::stringstream 与类型安全转换
 ├── bit_manipulation/       # 位运算惯用法
 │   └── basic_ops/          # 2 的幂、lowbit、位掩码、对齐、popcount
 ├── leetcode/               # 算法题实现（博客 posts/leetcode/ch*）
