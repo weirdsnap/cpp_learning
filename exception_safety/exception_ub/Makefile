@@ -1,20 +1,20 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../third_party/doctest
 
-TARGETS = exception_ub exception_ub_test
+TARGETS = exception_ub.out exception_ub_test.out
 
 .PHONY: all clean test
 
 all: $(TARGETS)
 
-exception_ub: exception_ub.cpp
+exception_ub.out: exception_ub.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-exception_ub_test: exception_ub_test.cpp
+exception_ub_test.out: exception_ub_test.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-test: exception_ub_test
-	./exception_ub_test
+test: exception_ub_test.out
+	./exception_ub_test.out
 
 clean:
 	rm -f $(TARGETS)

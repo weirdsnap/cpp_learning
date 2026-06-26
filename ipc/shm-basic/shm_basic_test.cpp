@@ -39,7 +39,7 @@ TEST_CASE("shm-basic 写入并读取消息") {
     std::system("shm_unlink my_shm 2>/dev/null");
 
     // 后台启动 writer，写入测试消息，2 秒后自动清理
-    std::string writer_cmd = "./shm_basic_writer --test '";
+    std::string writer_cmd = "./shm_basic_writer.out --test '";
     writer_cmd += test_msg;
     writer_cmd += "' > writer.log 2>&1 &";
     std::system(writer_cmd.c_str());
@@ -56,7 +56,7 @@ TEST_CASE("shm-basic 写入并读取消息") {
     CHECK(ready);
 
     // 启动 reader
-    std::string output = exec("./shm_basic_reader");
+    std::string output = exec("./shm_basic_reader.out");
 
     // 验证读取到消息
     CHECK(output.find(test_msg) != std::string::npos);

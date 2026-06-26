@@ -39,7 +39,7 @@ TEST_CASE("shm-ringbuffer 生产消费 10 条消息") {
     std::system("shm_unlink /my_shm_ringbuffer 2>/dev/null");
 
     // 后台启动 writer，生产 count 条消息后自动退出并清理
-    std::string writer_cmd = "./shm_ringbuffer_writer " + std::to_string(count) + " > writer.log 2>&1 &";
+    std::string writer_cmd = "./shm_ringbuffer_writer.out " + std::to_string(count) + " > writer.log 2>&1 &";
     std::system(writer_cmd.c_str());
 
     // 等待 writer 创建共享内存（最多 5 秒）
@@ -54,7 +54,7 @@ TEST_CASE("shm-ringbuffer 生产消费 10 条消息") {
     CHECK(ready);
 
     // 启动 reader
-    std::string output = exec(("./shm_ringbuffer_reader " + std::to_string(count)).c_str());
+    std::string output = exec(("./shm_ringbuffer_reader.out " + std::to_string(count)).c_str());
 
     // 验证消费完成
     CHECK(output.find("消费完成，共 10 条") != std::string::npos);

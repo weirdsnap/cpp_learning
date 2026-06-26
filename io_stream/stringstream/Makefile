@@ -4,16 +4,16 @@ DOCTEST  := -I ../../third_party/doctest
 
 .PHONY: all test clean
 
-all: stringstream stringstream_test
+all: stringstream.out stringstream_test.out
 
-stringstream: stringstream.cpp
+stringstream.out: stringstream.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-stringstream_test: stringstream_test.cpp
+stringstream_test.out: stringstream_test.cpp
 	$(CXX) $(CXXFLAGS) $(DOCTEST) -o $@ $<
 
-test: stringstream_test
-	./stringstream_test
+test: stringstream_test.out
+	./stringstream_test.out
 
 clean:
-	rm -f stringstream stringstream_test
+	rm -f stringstream.out stringstream_test.out

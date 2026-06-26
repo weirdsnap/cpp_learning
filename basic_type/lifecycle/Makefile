@@ -1,20 +1,20 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -Wno-reorder -Wno-return-local-addr -I ../../third_party/doctest
 
-TARGETS = lifecycle lifecycle_test
+TARGETS = lifecycle.out lifecycle_test.out
 
 .PHONY: all clean test
 
 all: $(TARGETS)
 
-lifecycle: lifecycle.cpp
+lifecycle.out: lifecycle.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-lifecycle_test: lifecycle_test.cpp
+lifecycle_test.out: lifecycle_test.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-test: lifecycle_test
-	./lifecycle_test
+test: lifecycle_test.out
+	./lifecycle_test.out
 
 clean:
 	rm -f $(TARGETS)

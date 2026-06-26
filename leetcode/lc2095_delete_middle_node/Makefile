@@ -4,13 +4,13 @@ DOCTEST  := -I ../../third_party/doctest
 
 .PHONY: all test clean
 
-all: lc2095_test
+all: lc2095_test.out
 
-lc2095_test: lc2095_test.cpp solution.hpp
+lc2095_test.out: lc2095_test.cpp solution.hpp
 	$(CXX) $(CXXFLAGS) $(DOCTEST) -o $@ $<
 
-test: lc2095_test
-	./lc2095_test
+test: lc2095_test.out
+	./lc2095_test.out
 
 clean:
-	rm -f lc2095_test
+	rm -f lc2095_test.out

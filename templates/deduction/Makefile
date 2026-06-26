@@ -1,20 +1,20 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../third_party/doctest
 
-TARGETS = deduction deduction_test
+TARGETS = deduction.out deduction_test.out
 
 .PHONY: all clean test
 
 all: $(TARGETS)
 
-deduction: deduction.cpp
+deduction.out: deduction.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-deduction_test: deduction_test.cpp
+deduction_test.out: deduction_test.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-test: deduction_test
-	./deduction_test
+test: deduction_test.out
+	./deduction_test.out
 
 clean:
 	rm -f $(TARGETS)

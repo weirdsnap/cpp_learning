@@ -1,20 +1,20 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../third_party/doctest
 
-TARGETS = nvi nvi_test
+TARGETS = nvi.out nvi_test.out
 
 .PHONY: all clean test
 
 all: $(TARGETS)
 
-nvi: nvi.cpp
+nvi.out: nvi.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-nvi_test: nvi_test.cpp
+nvi_test.out: nvi_test.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-test: nvi_test
-	./nvi_test
+test: nvi_test.out
+	./nvi_test.out
 
 clean:
 	rm -f $(TARGETS)

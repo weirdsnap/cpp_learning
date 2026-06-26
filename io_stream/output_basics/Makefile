@@ -4,16 +4,16 @@ DOCTEST  := -I ../../third_party/doctest
 
 .PHONY: all test clean
 
-all: output_basics output_basics_test
+all: output_basics.out output_basics_test.out
 
-output_basics: output_basics.cpp
+output_basics.out: output_basics.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-output_basics_test: output_basics_test.cpp
+output_basics_test.out: output_basics_test.cpp
 	$(CXX) $(CXXFLAGS) $(DOCTEST) -o $@ $<
 
-test: output_basics_test
-	./output_basics_test
+test: output_basics_test.out
+	./output_basics_test.out
 
 clean:
-	rm -f output_basics output_basics_test
+	rm -f output_basics.out output_basics_test.out

@@ -1,20 +1,20 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../third_party/doctest
 
-TARGETS = fundamental_types fundamental_types_test
+TARGETS = fundamental_types.out fundamental_types_test.out
 
 .PHONY: all clean test
 
 all: $(TARGETS)
 
-fundamental_types: fundamental_types.cpp
+fundamental_types.out: fundamental_types.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-fundamental_types_test: fundamental_types_test.cpp
+fundamental_types_test.out: fundamental_types_test.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-test: fundamental_types_test
-	./fundamental_types_test
+test: fundamental_types_test.out
+	./fundamental_types_test.out
 
 clean:
 	rm -f $(TARGETS)

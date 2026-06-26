@@ -4,16 +4,16 @@ DOCTEST  := -I ../../third_party/doctest
 
 .PHONY: all test clean
 
-all: vptr_vbptr vptr_vbptr_test
+all: vptr_vbptr.out vptr_vbptr_test.out
 
-vptr_vbptr: vptr_vbptr.cpp
+vptr_vbptr.out: vptr_vbptr.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-vptr_vbptr_test: vptr_vbptr_test.cpp
+vptr_vbptr_test.out: vptr_vbptr_test.cpp
 	$(CXX) $(CXXFLAGS) $(DOCTEST) -o $@ $<
 
-test: vptr_vbptr_test
-	./vptr_vbptr_test
+test: vptr_vbptr_test.out
+	./vptr_vbptr_test.out
 
 clean:
-	rm -f vptr_vbptr vptr_vbptr_test
+	rm -f vptr_vbptr.out vptr_vbptr_test.out

@@ -117,10 +117,10 @@ make
 cd ipc/shm-basic
 
 # 终端 1
-./shm_basic_writer
+./shm_basic_writer.out
 
 # 终端 2
-./shm_basic_reader
+./shm_basic_reader.out
 ```
 
 ### POSIX 共享内存环形缓冲区
@@ -129,10 +129,10 @@ cd ipc/shm-basic
 cd ipc/shm-ringbuffer
 
 # 终端 1
-./shm_ringbuffer_writer
+./shm_ringbuffer_writer.out
 
 # 终端 2
-./shm_ringbuffer_reader
+./shm_ringbuffer_reader.out
 ```
 
 ## 添加新的子项目

@@ -4,16 +4,16 @@ DOCTEST  := -I ../../third_party/doctest
 
 .PHONY: all test clean
 
-all: udl udl_test
+all: udl.out udl_test.out
 
-udl: udl.cpp
+udl.out: udl.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-udl_test: udl_test.cpp
+udl_test.out: udl_test.cpp
 	$(CXX) $(CXXFLAGS) $(DOCTEST) -o $@ $<
 
-test: udl_test
-	./udl_test
+test: udl_test.out
+	./udl_test.out
 
 clean:
-	rm -f udl udl_test
+	rm -f udl.out udl_test.out

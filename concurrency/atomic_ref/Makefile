@@ -4,16 +4,16 @@ DOCTEST  := -I ../../third_party/doctest
 
 .PHONY: all test clean
 
-all: atomic_ref atomic_ref_test
+all: atomic_ref.out atomic_ref_test.out
 
-atomic_ref: atomic_ref.cpp
+atomic_ref.out: atomic_ref.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $< -lpthread
 
-atomic_ref_test: atomic_ref_test.cpp
+atomic_ref_test.out: atomic_ref_test.cpp
 	$(CXX) $(CXXFLAGS) $(DOCTEST) -o $@ $< -lpthread
 
-test: atomic_ref_test
-	./atomic_ref_test
+test: atomic_ref_test.out
+	./atomic_ref_test.out
 
 clean:
-	rm -f atomic_ref atomic_ref_test
+	rm -f atomic_ref.out atomic_ref_test.out

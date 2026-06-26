@@ -1,20 +1,20 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../third_party/doctest
 
-TARGETS = forwarding forwarding_test
+TARGETS = forwarding.out forwarding_test.out
 
 .PHONY: all clean test
 
 all: $(TARGETS)
 
-forwarding: forwarding.cpp
+forwarding.out: forwarding.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-forwarding_test: forwarding_test.cpp
+forwarding_test.out: forwarding_test.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-test: forwarding_test
-	./forwarding_test
+test: forwarding_test.out
+	./forwarding_test.out
 
 clean:
 	rm -f $(TARGETS)

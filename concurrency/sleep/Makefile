@@ -4,16 +4,16 @@ DOCTEST  := -I ../../third_party/doctest
 
 .PHONY: all test clean
 
-all: sleep sleep_test
+all: sleep.out sleep_test.out
 
-sleep: sleep.cpp
+sleep.out: sleep.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-sleep_test: sleep_test.cpp
+sleep_test.out: sleep_test.cpp
 	$(CXX) $(CXXFLAGS) $(DOCTEST) -o $@ $<
 
-test: sleep_test
-	./sleep_test
+test: sleep_test.out
+	./sleep_test.out
 
 clean:
-	rm -f sleep sleep_test
+	rm -f sleep.out sleep_test.out

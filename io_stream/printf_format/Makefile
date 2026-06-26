@@ -4,16 +4,16 @@ DOCTEST  := -I ../../third_party/doctest
 
 .PHONY: all test clean
 
-all: printf_format printf_format_test
+all: printf_format.out printf_format_test.out
 
-printf_format: printf_format.cpp
+printf_format.out: printf_format.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-printf_format_test: printf_format_test.cpp
+printf_format_test.out: printf_format_test.cpp
 	$(CXX) $(CXXFLAGS) $(DOCTEST) -o $@ $<
 
-test: printf_format_test
-	./printf_format_test
+test: printf_format_test.out
+	./printf_format_test.out
 
 clean:
-	rm -f printf_format printf_format_test
+	rm -f printf_format.out printf_format_test.out

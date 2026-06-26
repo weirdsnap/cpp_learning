@@ -1,20 +1,20 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../third_party/doctest
 
-TARGETS = overload overload_test
+TARGETS = overload.out overload_test.out
 
 .PHONY: all clean test
 
 all: $(TARGETS)
 
-overload: overload.cpp
+overload.out: overload.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-overload_test: overload_test.cpp
+overload_test.out: overload_test.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-test: overload_test
-	./overload_test
+test: overload_test.out
+	./overload_test.out
 
 clean:
 	rm -f $(TARGETS)

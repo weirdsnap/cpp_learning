@@ -1,20 +1,20 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../third_party/doctest
 
-TARGETS = parity_xor parity_xor_test
+TARGETS = parity_xor.out parity_xor_test.out
 
 .PHONY: all clean test
 
 all: $(TARGETS)
 
-parity_xor: parity_xor.cpp
+parity_xor.out: parity_xor.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-parity_xor_test: parity_xor_test.cpp
+parity_xor_test.out: parity_xor_test.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-test: parity_xor_test
-	./parity_xor_test
+test: parity_xor_test.out
+	./parity_xor_test.out
 
 clean:
 	rm -f $(TARGETS)

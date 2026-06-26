@@ -1,20 +1,20 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../third_party/doctest
 
-TARGETS = hamming hamming_test
+TARGETS = hamming.out hamming_test.out
 
 .PHONY: all clean test
 
 all: $(TARGETS)
 
-hamming: hamming.cpp
+hamming.out: hamming.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-hamming_test: hamming_test.cpp
+hamming_test.out: hamming_test.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
-test: hamming_test
-	./hamming_test
+test: hamming_test.out
+	./hamming_test.out
 
 clean:
 	rm -f $(TARGETS)

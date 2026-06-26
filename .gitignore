@@ -1,10 +1,15 @@
-# 博客文章/笔记（非代码部分）
+# 博客文章/笔记（非代码部分，软连接）
 notes
 
-# 编译产物
+# 临时/测试目录
+temp/
 build/
 Build/
 build-*/
+.cache/
+Testing/
+
+# 编译产物
 *.o
 *.obj
 *.d
@@ -13,46 +18,6 @@ build-*/
 *.lo
 *.exe
 *.app
-
-# 可执行文件（由 Makefile 生成）
-reader
-writer
-shm_basic_reader
-shm_basic_writer
-shm_basic_test
-shm_ringbuffer_reader
-shm_ringbuffer_writer
-shm_ringbuffer_test
-basic_type/fundamental_types/fundamental_types
-basic_type/fundamental_types/fundamental_types_test
-basic_type/type_deduction/type_deduction
-basic_type/type_deduction/type_deduction_test
-basic_type/const_reference/const_reference
-basic_type/const_reference/const_reference_test
-basic_type/lifecycle/lifecycle
-basic_type/lifecycle/lifecycle_test
-basic_type/polymorphism/polymorphism
-basic_type/polymorphism/polymorphism_test
-basic_type/function_lambda/function_lambda
-basic_type/function_lambda/function_lambda_test
-basic_type/modern_types/modern_types
-basic_type/modern_types/modern_types_test
-basic_type/nullptr_void/nullptr_void
-basic_type/nullptr_void/nullptr_void_test
-basic_type/integer_promotion/integer_promotion
-basic_type/integer_promotion/integer_promotion_test
-basic_type/type_alias/type_alias
-basic_type/type_alias/type_alias_test
-basic_type/string_ops/string_ops
-basic_type/string_ops/string_ops_test
-basic_type/bool_conversion/bool_conversion
-basic_type/bool_conversion/bool_conversion_test
-
-# basic_type/udl 可执行文件
-basic_type/udl/udl
-basic_type/udl/udl_test
-
-# 预编译头
 *.gch
 *.pch
 
@@ -90,124 +55,3 @@ compile_commands.json
 
 # vcpkg
 vcpkg_installed/
-
-# 测试/缓存
-Testing/
-.cache/
-
-# object_model 可执行文件
-object_model/virtual_dispatch/virtual_dispatch
-object_model/virtual_dispatch/virtual_dispatch_test
-object_model/name_hiding/name_hiding
-object_model/name_hiding/name_hiding_test
-object_model/conversion_functions/conversion_functions
-object_model/conversion_functions/conversion_functions_test
-object_model/nvi/nvi
-object_model/nvi/nvi_test
-object_model/virtual_inheritance/virtual_inheritance
-object_model/virtual_inheritance/virtual_inheritance_test
-object_model/runtime_polymorphism/runtime_polymorphism
-object_model/runtime_polymorphism/runtime_polymorphism_test
-object_model/override_rtti/override_rtti
-object_model/override_rtti/override_rtti_test
-
-# memory_mgmt 可执行文件
-memory_mgmt/smart_pointers/smart_pointers
-memory_mgmt/smart_pointers/smart_pointers_test
-memory_mgmt/ownership/ownership
-memory_mgmt/ownership/ownership_test
-memory_mgmt/move_elision/move_elision
-memory_mgmt/move_elision/move_elision_test
-memory_mgmt/raii/raii
-memory_mgmt/raii/raii_test
-memory_mgmt/initialization/initialization
-memory_mgmt/initialization/initialization_test
-
-# ipc/shm-chunk 可执行文件
-ipc/shm-chunk/shm_chunk_productor
-ipc/shm-chunk/shm_chunk_consumer
-ipc/shm-chunk/shm_chunk_test
-ipc/shm-chunk/shm_chunk_bench
-
-# data_validation 可执行文件
-data_validation/crc32/crc32
-data_validation/crc32/crc32_test
-data_validation/parity_xor/parity_xor
-data_validation/parity_xor/parity_xor_test
-data_validation/hamming/hamming
-data_validation/hamming/hamming_test
-
-# templates 可执行文件
-templates/deduction/deduction
-templates/deduction/deduction_test
-templates/overload/overload
-templates/overload/overload_test
-templates/specialization/specialization
-templates/specialization/specialization_test
-templates/forwarding/forwarding
-templates/forwarding/forwarding_test
-templates/variadic/variadic
-templates/variadic/variadic_test
-templates/dependent_base/dependent_base
-templates/dependent_base/dependent_base_test
-templates/if_constexpr/if_constexpr
-templates/if_constexpr/if_constexpr_test
-
-# bit_manipulation 可执行文件
-bit_manipulation/basic_ops/bit_ops
-bit_manipulation/basic_ops/bit_ops_test
-
-# ipc/socket 可执行文件
-ipc/socket/socket_server
-ipc/socket/socket_client
-ipc/socket/socket_test
-
-# ipc/minichat 可执行文件
-ipc/minichat/minichat_server
-ipc/minichat/minichat_client
-ipc/minichat/minichat_test
-
-# ipc/tinyrpc 可执行文件
-ipc/tinyrpc/tinyrpc_server
-ipc/tinyrpc/tinyrpc_client
-ipc/tinyrpc/tinyrpc_test
-
-# concurrency 可执行文件
-concurrency/basic_sync/basic_sync
-concurrency/basic_sync/basic_sync_test
-
-# exception_safety 可执行文件
-exception_safety/exception_ub/exception_ub
-exception_safety/exception_ub/exception_ub_test
-
-# concurrency 补充可执行文件
-concurrency/atomic_ref/atomic_ref
-concurrency/atomic_ref/atomic_ref_test
-concurrency/sleep/sleep
-concurrency/sleep/sleep_test
-
-# io_stream 可执行文件
-io_stream/output_basics/output_basics
-io_stream/output_basics/output_basics_test
-io_stream/printf_format/printf_format
-io_stream/printf_format/printf_format_test
-io_stream/stringstream/stringstream
-io_stream/stringstream/stringstream_test
-
-# object_model 补充可执行文件
-object_model/pimpl/pimpl_demo
-object_model/pimpl/pimpl_test
-object_model/vptr_vbptr/vptr_vbptr
-object_model/vptr_vbptr/vptr_vbptr_test
-
-# leetcode 可执行文件
-leetcode/lc4_median_sorted_arrays/lc4_test
-leetcode/lc10_regular_expression_matching/lc10_test
-leetcode/lc14_longest_common_prefix/lc14_test
-leetcode/lc42_trapping_rain_water/lc42_test
-leetcode/lc135_candy/lc135_test
-leetcode/lc2095_delete_middle_node/lc2095_test
-leetcode/lc221_maximal_square/lc221_test
-leetcode/lc3558_assign_edge_weights/lc3558_test
-leetcode/lc3559_assign_edge_weights/lc3559_test
-leetcode/lc3612_process_string/lc3612_test
