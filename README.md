@@ -72,9 +72,15 @@
 │   ├── lc10_regular_expression_matching/ # LC 10 正则表达式匹配
 │   ├── lc14_longest_common_prefix/     # LC 14 最长公共前缀
 │   ├── lc42_trapping_rain_water/       # LC 42 接雨水
+│   ├── lc53_maximum_subarray/          # LC 53 最大子数组和（DP / 滚动 / 前缀和）
 │   ├── lc135_candy/                    # LC 135 分发糖果
+│   ├── lc198_house_robber/             # LC 198 打家劫舍（记忆化 / 递推 / 二维 / 滚动）
+│   ├── lc854_k_similar_strings/        # LC 854 相似度为 K 的字符串（BFS / A* / IDA*）
 │   ├── lc2095_delete_middle_node/      # LC 2095 删除链表的中间节点
+│   ├── lc2140_solving_questions_brainpower/ # LC 2140 解决智力问题（C++23 deducing this）
 │   ├── lc221_maximal_square/           # LC 221 最大正方形
+│   ├── lc3186_maximum_total_damage/    # LC 3186 施咒的最大总伤害（双指针 / 二分 / O(1) 滚动）
+│   ├── lc3517_smallest_palindrome/     # LC 3517 最小回文重排 I（map / 数组计数）
 │   ├── lc3558_assign_edge_weights/     # LC 3558 边权赋值方案数 I
 │   ├── lc3559_assign_edge_weights/     # LC 3559 边权赋值方案数 II
 │   └── lc3612_process_string/          # LC 3612 用特殊操作处理字符串 I
