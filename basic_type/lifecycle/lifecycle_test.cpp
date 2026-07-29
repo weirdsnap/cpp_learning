@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include <type_traits>
+#include <vector>
 
 static std::ostringstream g_log;
 
@@ -79,4 +80,43 @@ TEST_CASE("静态存储期变量默认零初始化") {
     CHECK(g_static_arr[2] == 0);
 
     local_static_init();
+}
+
+// 博客 cpp/ch07/33：vector(n) 的默认插入语义（C++11）
+struct CtorProbe {
+    static inline int default_calls = 0;
+    static inline int copy_calls = 0;
+    static void reset() { default_calls = 0; copy_calls = 0; }
+    CtorProbe() { default_calls++; }
+    CtorProbe(const CtorProbe&) { copy_calls++; }
+};
+
+TEST_CASE("vector(n) 默认插入：n 次默认构造，不经过拷贝构造") {
+    CtorProbe::reset();
+    {
+        std::vector<CtorProbe> v(5);
+        CHECK(v.size() == 5);
+    }
+    CHECK(CtorProbe::default_calls == 5);
+    CHECK(CtorProbe::copy_calls == 0);
+}
+
+TEST_CASE("vector(n, value) 是拷贝语义：1 次构造 + n 次拷贝") {
+    CtorProbe::reset();
+    {
+        std::vector<CtorProbe> v(5, CtorProbe{});
+        CHECK(v.size() == 5);
+    }
+    CHECK(CtorProbe::default_calls == 1);
+    CHECK(CtorProbe::copy_calls == 5);
+}
+
+TEST_CASE("reserve 只分配内存，不构造元素；resize 扩容部分默认插入") {
+    CtorProbe::reset();
+    std::vector<CtorProbe> v;
+    v.reserve(5);
+    CHECK(CtorProbe::default_calls == 0);
+    v.resize(3);
+    CHECK(CtorProbe::default_calls == 3);
+    CHECK(CtorProbe::copy_calls == 0);
 }

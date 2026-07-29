@@ -17,7 +17,7 @@
 │   ├── fundamental_types/  # 无符号回绕、char 符号性、字面量、字符串字面量
 │   ├── type_deduction/     # auto / decltype / decltype(auto) / 类型退化
 │   ├── const_reference/    # const 引用、std::max/min 返回引用
-│   ├── lifecycle/          # 构造析构顺序、const/constexpr、悬垂引用
+│   ├── lifecycle/          # 构造析构顺序、const/constexpr、悬垂引用、vector 默认插入
 │   ├── polymorphism/       # 静态/动态类型、enum class、对象切片
 │   ├── function_lambda/    # operator bool、函数对象、Lambda、求值顺序
 │   ├── modern_types/       # variant / optional / 转发引用
@@ -79,6 +79,7 @@
 │   ├── lc2095_delete_middle_node/      # LC 2095 删除链表的中间节点
 │   ├── lc2140_solving_questions_brainpower/ # LC 2140 解决智力问题（C++23 deducing this）
 │   ├── lc221_maximal_square/           # LC 221 最大正方形
+│   ├── lc2606_maximum_cost_substring/  # LC 2606 最大开销子字符串（Kadane 变体）
 │   ├── lc3186_maximum_total_damage/    # LC 3186 施咒的最大总伤害（双指针 / 二分 / O(1) 滚动）
 │   ├── lc3517_smallest_palindrome/     # LC 3517 最小回文重排 I（map / 数组计数）
 │   ├── lc3558_assign_edge_weights/     # LC 3558 边权赋值方案数 I
