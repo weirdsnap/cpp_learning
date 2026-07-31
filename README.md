@@ -67,6 +67,8 @@
 │   └── stringstream/       # std::stringstream 与类型安全转换
 ├── bit_manipulation/       # 位运算惯用法
 │   └── basic_ops/          # 2 的幂、lowbit、位掩码、对齐、popcount
+├── stl/                    # 标准库容器与算法相关验证（博客 ch07）
+│   └── min_max/            # max 家族：双参数 / initializer_list / max_element / ranges::max
 ├── leetcode/               # 算法题实现（博客 posts/leetcode/ch*）
 │   ├── lc4_median_sorted_arrays/       # LC 4 寻找两个正序数组的中位数
 │   ├── lc10_regular_expression_matching/ # LC 10 正则表达式匹配
