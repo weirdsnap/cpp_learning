@@ -24,8 +24,8 @@ public:
 };
 
 // 解法一：记忆化搜索，使用 C++23 deducing this 的 lambda 递归
-// CI 的 GCC 13 不支持显式对象参数，用特性宏保护
-#if defined(__cpp_explicit_this_parameter) && __cpp_explicit_this_parameter >= 202302L
+// CI 的 GCC 13 不支持显式对象参数，用特性宏保护（GCC 14 定义的是 202110L）
+#if defined(__cpp_explicit_this_parameter) && __cpp_explicit_this_parameter >= 202110L
 #define LC2140_HAS_MEMO 1
 class SolutionMemo {
 public:
