@@ -121,6 +121,52 @@ public:
     }
 };
 
+// 单数组降序 c 版（用户改进）：不要 prev/cur 两个数组，dp[j][c] 原地滚动
+// 关键：c 从大到小遍历。c >= cost 时读 dp[j][c-cost]：
+//   - c-cost < c，降序还没更新到，读到的是上一行的旧值（正确）
+//   - dp[j-1][c-cost] 是本行已更新的左邻（正确）
+// c < cost 的状态不可能到达（花费不够格子的 cost），必须显式置 -1 清掉旧值
+class SolutionRolling1D {
+public:
+    int maxPathScore(std::vector<std::vector<int>>& grid, int k) {
+        const int rows = grid.size();
+        const int cols = grid[0].size();
+        int maxCost = std::min(k, rows + cols - 2);
+        std::vector<std::vector<int>> dp(cols, std::vector<int>(maxCost + 1, -1));
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                int cost = (grid[i][j] == 0 ? 0 : 1);
+                int score = grid[i][j];
+
+                if (i == 0 && j == 0) {
+                    if (cost <= maxCost) dp[j][cost] = score;
+                    continue;
+                }
+
+                // c 从大到小：c>=cost 时读旧值安全，c<cost 时显式置 -1
+                for (int c = maxCost; c >= 0; c--) {
+                    if (c < cost) {
+                        dp[j][c] = -1;
+                        continue;
+                    }
+                    int best = -1;
+                    if (i > 0 && dp[j][c - cost] != -1)
+                        best = std::max(best, dp[j][c - cost] + score);
+                    if (j > 0 && dp[j - 1][c - cost] != -1)
+                        best = std::max(best, dp[j - 1][c - cost] + score);
+                    dp[j][c] = best;
+                }
+            }
+        }
+
+        int ans = -1;
+        for (int c = 0; c <= maxCost; c++)
+            ans = std::max(ans, dp[cols - 1][c]);
+        return ans;
+    }
+};
+
 } // namespace lc3742
 
 #if defined(__cpp_explicit_this_parameter) && __cpp_explicit_this_parameter >= 202110L

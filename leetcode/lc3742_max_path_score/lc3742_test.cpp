@@ -12,6 +12,8 @@ TEST_CASE("LC 3742 examples") {
     CHECK(lc3742::Solution3D().maxPathScore(g2, 1) == -1);
     CHECK(lc3742::SolutionRollingFixed().maxPathScore(g1, 1) == 2);
     CHECK(lc3742::SolutionRollingFixed().maxPathScore(g2, 1) == -1);
+    CHECK(lc3742::SolutionRolling1D().maxPathScore(g1, 1) == 2);
+    CHECK(lc3742::SolutionRolling1D().maxPathScore(g2, 1) == -1);
 }
 
 TEST_CASE("LC 3742 rolling parity check") {
@@ -32,6 +34,7 @@ TEST_CASE("LC 3742 random cross-check") {
         g[0][0] = 0;  // 题意保证
         int expected = lc3742::Solution3D().maxPathScore(g, k);
         CHECK(lc3742::SolutionRollingFixed().maxPathScore(g, k) == expected);
+        CHECK(lc3742::SolutionRolling1D().maxPathScore(g, k) == expected);
 #if LC3742_HAS_DEDUCING_THIS
         CHECK(lc3742::SolutionMemo().maxPathScore(g, k) == expected);
 #endif
