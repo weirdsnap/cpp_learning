@@ -4,12 +4,17 @@
 #include <random>
 
 #include "solution.hpp"
+#include "segtree.hpp"
 
 TEST_CASE("LC 53 example: [-2,1,-3,4,-1,2,1,-5,4] -> 6") {
     std::vector<int> a = {-2, 1, -3, 4, -1, 2, 1, -5, 4}, b = a, c = a;
     CHECK(lc53::SolutionDP().maxSubArray(a) == 6);
     CHECK(lc53::SolutionRolling().maxSubArray(b) == 6);
     CHECK(lc53::SolutionPrefixSum().maxSubArray(c) == 6);
+#if LC53_HAS_SEGTREE
+    std::vector<int> d = a;
+    CHECK(lc53::SolutionSegTree().maxSubArray(d) == 6);
+#endif
 }
 
 TEST_CASE("LC 53 edge cases") {
@@ -20,6 +25,11 @@ TEST_CASE("LC 53 edge cases") {
     CHECK(lc53::SolutionDP().maxSubArray(neg) == -1);
     std::vector<int> neg2 = {-2, -1};
     CHECK(lc53::SolutionPrefixSum().maxSubArray(neg2) == -1);
+#if LC53_HAS_SEGTREE
+    // 全负数：best 不能取到"空段"，叶子四个字段都是 nums[l] 保证这一点
+    std::vector<int> neg3 = neg;
+    CHECK(lc53::SolutionSegTree().maxSubArray(neg3) == -1);
+#endif
 }
 
 TEST_CASE("LC 53 random cross-check: three solutions agree with brute force") {
@@ -43,5 +53,9 @@ TEST_CASE("LC 53 random cross-check: three solutions agree with brute force") {
         CHECK(lc53::SolutionDP().maxSubArray(a) == brute);
         CHECK(lc53::SolutionRolling().maxSubArray(b) == brute);
         CHECK(lc53::SolutionPrefixSum().maxSubArray(c) == brute);
+#if LC53_HAS_SEGTREE
+        auto d = v;
+        CHECK(lc53::SolutionSegTree().maxSubArray(d) == brute);
+#endif
     }
 }

@@ -1,5 +1,5 @@
 CXX      := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra
+CXXFLAGS := -std=c++23 -Wall -Wextra
 DOCTEST  := -I ../../third_party/doctest
 
 .PHONY: all test clean
