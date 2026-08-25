@@ -92,6 +92,48 @@ public:
     }
 };
 
+// O(n²) 优化版（表驱动写法）：maxLeft/maxRight 滚动表替代逐 len 扫描
+//
+// maxLeft[i][j]  = max over k ∈ [i, j] of (dp[i][k] + sum[i..k])   —— 左保留候选
+// maxRight[i][j] = max over k ∈ [i, j] of (dp[k][j] + sum[k..j])   —— 右保留候选
+// 行内指针 i0 单调右移（分值全正），表项在 dp[i][j] 算出后原地滚动更新。
+class SolutionFastTable {
+public:
+    int stoneGameV(std::vector<int>& stoneValue) {
+        const int n = stoneValue.size();
+        std::vector<std::vector<int>> dp(n, std::vector<int>(n, 0));
+        std::vector<std::vector<int>> maxLeft(n, std::vector<int>(n, 0));
+        std::vector<std::vector<int>> maxRight(n, std::vector<int>(n, 0));
+
+        std::vector<int> pre(n + 1, 0);
+        for (int i = 0; i < n; i++) pre[i + 1] = pre[i] + stoneValue[i];
+
+        for (int i = n - 1; i >= 0; i--) {
+            maxLeft[i][i] = maxRight[i][i] = stoneValue[i];
+            int suml = 0;      // sum[i..i0]
+            int i0 = i - 1;    // 最大的满足 suml*2 <= sum 的切点 k
+            for (int j = i + 1; j < n; j++) {
+                int sum = pre[j + 1] - pre[i];
+
+                while (i0 + 1 < j && (suml + stoneValue[i0 + 1]) * 2 <= sum) {
+                    suml += stoneValue[i0 + 1];
+                    i0++;
+                }
+
+                int best = 0;
+                if (i <= i0) best = std::max(best, maxLeft[i][i0]);          // 左保留
+                if (i0 + 1 < j) best = std::max(best, maxRight[i0 + 2][j]);  // 右保留
+                if (suml * 2 == sum) best = std::max(best, maxRight[i0 + 1][j]);  // 等和补一刀
+                dp[i][j] = best;
+
+                maxLeft[i][j] = std::max(maxLeft[i][j - 1], sum + dp[i][j]);
+                maxRight[i][j] = std::max(maxRight[i + 1][j], sum + dp[i][j]);
+            }
+        }
+        return dp[0][n - 1];
+    }
+};
+
 // 写法变体：半开区间 [i, j)，i 降序 + j 升序替代 len 枚举
 class SolutionHalfOpen {
 public:
