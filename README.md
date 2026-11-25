@@ -12,11 +12,11 @@
 | `object_model/` | cpp/ch02 对象模型与多态机制 |
 | `memory_mgmt/` | cpp/ch03 内存管理与资源安全 |
 | `templates/` | cpp/ch04 模板与泛型编程 |
-| `concurrency/` | cpp/ch05 并发与内存模型 |
-| `stdlib/` | cpp/ch06 标准库与工程实践（含 IO：output_basics / printf_format / stringstream） |
-| `exception_safety/` | cpp/ch07 异常安全与未定义行为 |
-| `metaprogramming/` | cpp/ch08 编译期元编程与深层机制（待补） |
-| `misc/` | cpp/ch09 杂项与陷阱（位运算、UDL、sleep 等） |
+| `concurrency/` | cpp/ch06 并发与内存模型 |
+| `stdlib/` | cpp/ch07 标准库与工程实践（含 IO：output_basics / printf_format / stringstream） |
+| `exception_safety/` | cpp/ch08 异常安全与未定义行为 |
+| `metaprogramming/` | cpp/ch09 编译期元编程与深层机制（待补） |
+| `misc/` | cpp/ch10 杂项与陷阱（位运算、UDL、sleep 等） |
 | `practices/` | cpp/practices 专项实践（ipc、对象池、lambda 递归、type_identity） |
 | `leetcode/` | leetcode 各子分类 |
 | `data_validation/` | 预留给后端网络系列的差错控制篇（crc32 / hamming / parity_xor），文章未写 |
