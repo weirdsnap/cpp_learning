@@ -1,8 +1,10 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra
 
-# 自动发现 ipc/、basic_type/、object_model/、memory_mgmt/、data_validation/、templates/、bit_manipulation/、concurrency/、exception_safety/、io_stream/、stl/ 和 leetcode/ 下包含 Makefile 的子项目
-SUBDIRS := $(foreach dir,$(wildcard ipc/* basic_type/* object_model/* memory_mgmt/* data_validation/* templates/* bit_manipulation/* concurrency/* exception_safety/* io_stream/* stl/* leetcode/*),$(if $(wildcard $(dir)/Makefile),$(dir),))
+# 顶层目录与博客章节一一对应（映射表见 README.md）。
+# 用 find 自动发现各章节目录下任意深度的子项目（含 Makefile 即收编）。
+CHAPTERS := basic_type object_model memory_mgmt templates concurrency stdlib exception_safety metaprogramming misc practices data_validation leetcode
+SUBDIRS := $(shell find $(CHAPTERS) -name Makefile -exec dirname {} \; 2>/dev/null)
 
 .PHONY: all clean test $(SUBDIRS)
 

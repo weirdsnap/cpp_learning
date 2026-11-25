@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../third_party/doctest
+CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../../third_party/doctest
 
 TARGETS = socket_server.out socket_client.out socket_test.out
 

@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../third_party/doctest
+CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../../third_party/doctest
 
 TARGETS = tinyrpc_server.out tinyrpc_client.out tinyrpc_test.out
 

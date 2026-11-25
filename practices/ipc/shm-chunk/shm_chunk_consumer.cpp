@@ -17,7 +17,12 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#if defined(__x86_64__) || defined(__i386__)
 #include <emmintrin.h>
+#define CPU_PAUSE() CPU_PAUSE()
+#else
+#define CPU_PAUSE() ((void)0)  // 非 x86 平台：_mm_pause 只是自旋提示，空操作无语义影响
+#endif
 
 int main(int argc, char* argv[]) {
     int stream_count = (argc > 1) ? std::atoi(argv[1]) : 1;
@@ -54,7 +59,7 @@ int main(int argc, char* argv[]) {
             ChunkDesc desc{};
             // 忙等或轮询直到有数据
             while (!pop_desc(layout, desc)) {
-                _mm_pause();
+                CPU_PAUSE();
                 std::this_thread::sleep_for(std::chrono::microseconds(10));
             }
 

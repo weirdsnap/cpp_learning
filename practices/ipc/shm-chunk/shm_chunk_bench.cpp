@@ -13,7 +13,12 @@
 #include <cstring>
 #include <algorithm>
 #include <chrono>
+#if defined(__x86_64__) || defined(__i386__)
 #include <emmintrin.h>
+#define CPU_PAUSE() CPU_PAUSE()
+#else
+#define CPU_PAUSE() ((void)0)  // 非 x86 平台：_mm_pause 只是自旋提示，空操作无语义影响
+#endif
 #include <iostream>
 
 inline constexpr size_t BENCH_STREAM_SIZE = 1000ULL * 1024 * 1024;  // 1000MB
@@ -34,7 +39,7 @@ static void producer(ShmLayout layout) {
         uint32_t a = layout.header->chunk_alloc_idx.load(std::memory_order_relaxed);
         uint32_t r = layout.header->chunk_return_idx.load(std::memory_order_acquire);
         while (a == r) {  // free ring 空时等待
-            _mm_pause();
+            CPU_PAUSE();
             r = layout.header->chunk_return_idx.load(std::memory_order_acquire);
         }
         uint32_t cid = layout.free_array[a % CHUNK_COUNT];
@@ -49,7 +54,7 @@ static void producer(ShmLayout layout) {
         uint64_t dw = layout.header->desc_write_idx.load(std::memory_order_relaxed);
         uint64_t dr = layout.header->desc_read_idx.load(std::memory_order_acquire);
         while (dw - dr >= DESC_COUNT - 1) {
-            _mm_pause();
+            CPU_PAUSE();
             dr = layout.header->desc_read_idx.load(std::memory_order_acquire);
         }
 
@@ -77,7 +82,7 @@ static int consumer(ShmLayout layout) {
         uint64_t dr = layout.header->desc_read_idx.load(std::memory_order_relaxed);
         uint64_t dw = layout.header->desc_write_idx.load(std::memory_order_acquire);
         while (dr == dw) {
-            _mm_pause();
+            CPU_PAUSE();
             dw = layout.header->desc_write_idx.load(std::memory_order_acquire);
         }
 
@@ -101,7 +106,7 @@ static int consumer(ShmLayout layout) {
         uint32_t r = layout.header->chunk_return_idx.load(std::memory_order_relaxed);
         uint32_t a = layout.header->chunk_alloc_idx.load(std::memory_order_acquire);
         while (r - a >= CHUNK_COUNT) {  // free ring 满时等待
-            _mm_pause();
+            CPU_PAUSE();
             a = layout.header->chunk_alloc_idx.load(std::memory_order_acquire);
         }
         layout.free_array[r % CHUNK_COUNT] = desc.chunk_id;

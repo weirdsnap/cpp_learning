@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../third_party/doctest
+CXXFLAGS = -std=c++17 -Wall -Wextra -I ../../../third_party/doctest
 
 TARGETS = minichat_server.out minichat_client.out minichat_test.out
 
