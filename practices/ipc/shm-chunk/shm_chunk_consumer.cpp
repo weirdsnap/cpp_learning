@@ -19,7 +19,7 @@
 #include <thread>
 #if defined(__x86_64__) || defined(__i386__)
 #include <emmintrin.h>
-#define CPU_PAUSE() CPU_PAUSE()
+#define CPU_PAUSE() _mm_pause()
 #else
 #define CPU_PAUSE() ((void)0)  // 非 x86 平台：_mm_pause 只是自旋提示，空操作无语义影响
 #endif
